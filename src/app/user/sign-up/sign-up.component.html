@@ -1,0 +1,42 @@
+
+<div class="row">
+  <div class="col">
+    <h2>User Registration</h2>
+    <form class="col" #UserRegistrationForm="ngForm" (ngSubmit)="OnSubmit(UserRegistrationForm)">
+      <div class="row">
+        <div class="input-field">
+          <input type="text" name="userName" #userName="ngModel" [ngModel]="user?.userName">
+          <label>userName</label>
+        </div>
+        <div class="input-field">
+            <input type="password" name="password" #password="ngModel" [ngModel]="user?.password">
+            <label>password</label>
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="input-field">
+            <input type="text" name="email" #userName="ngModel" [ngModel]="user?.email">
+            <label>email</label>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="input-field">
+            <input type="text" name="firstName" #userName="ngModel" [ngModel]="user?.firstName">
+            <label>firstName</label>
+          </div>
+          <div class="input-field">
+            <input type="text" name="surName" #userName="ngModel" [ngModel]="user?.surName">
+            <label>surName</label>
+          </div>
+      </div>
+      <div class="row">
+        <div class="input-field">
+          <button class="btn-submit btn-large" type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+</div>
