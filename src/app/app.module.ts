@@ -13,6 +13,9 @@ import { SignInComponent } from './user/sign-in/sign-in.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { UserService } from './user/shared/user.service';
 import { AuthGuard } from './auth/auth.guard';
+import { HomeComponent } from './dashboard/home/home.component';
+import { ProfileComponent } from './dashboard/profile/profile.component';
+import { NetworksComponent } from './dashboard/networks/networks.component';
 
 
 @NgModule({
@@ -22,6 +25,9 @@ import { AuthGuard } from './auth/auth.guard';
     UserComponent,
     SignInComponent,
     SignUpComponent,
+    HomeComponent,
+    ProfileComponent,
+    NetworksComponent,
   ],
   imports: [
     BrowserModule,

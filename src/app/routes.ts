@@ -4,10 +4,20 @@ import { UserComponent } from './user/user.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { AuthGuard } from './auth/auth.guard';
+import { HomeComponent } from './dashboard/home/home.component';
+import { ProfileComponent } from './dashboard/profile/profile.component';
+import { NetworksComponent } from './dashboard/networks/networks.component';
 
 
 export const appRoutes: Routes = [
-    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
+        children: [
+            { path: 'home', component: HomeComponent},
+            { path: 'profile', component: ProfileComponent},
+            { path: 'networks', component: NetworksComponent},
+            { path: '', redirectTo: 'home', pathMatch: 'full'},
+            { path: '**', redirectTo: 'home', pathMatch: 'full'}
+        ] },
     { path: 'login', component: UserComponent,
         children: [
             { path: 'sign-in', component: SignInComponent }

@@ -16,6 +16,7 @@ interface UserResponse{
 @Injectable()
 export class UserService {
   readonly rootUrl = 'http://127.0.0.1:8080/users'
+  readonly rootUrlCreate = 'http://127.0.0.1:8080/users/create'
   loggedIn : boolean = false;
 
   constructor(private http: HttpClient) { }
@@ -28,7 +29,7 @@ export class UserService {
       surName : user.surName,
       email : user.email
     }
-    return this.http.post(this.rootUrl, body).subscribe(res => console.log(res));
+    return this.http.post(this.rootUrlCreate, body).subscribe(res => console.log(res));
   }
 
   userAuthentication(userName, password){
