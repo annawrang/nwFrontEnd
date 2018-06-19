@@ -1,8 +1,8 @@
-<div *ngIf="loginError">Incorrect username or password</div>
-<form #loginForm="ngForm" (ngSubmit)="OnSubmit(userName.value, password.value)">
+<div *ngIf="loginError">Incorrect email or password</div>
+<form #loginForm="ngForm" (ngSubmit)="OnSubmit(userEmail.value, password.value)">
   <div class="row">
     <div class="input-field">
-      <input type="text" #userName ngModel name="usern" placeholder="Username">
+      <input type="text" #userEmail ngModel name="userEmail" placeholder="Email">
     </div>
   </div>
   <div class="row">

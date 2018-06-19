@@ -6,7 +6,6 @@ import 'rxjs/add/operator/map';
 import { User } from './user.model';
 
 interface UserResponse{
-  userName: String;
   firstName: String;
   surName: String;
   password: String;
@@ -16,25 +15,24 @@ interface UserResponse{
 @Injectable()
 export class UserService {
   readonly rootUrl = 'http://127.0.0.1:8080/users'
-  readonly rootUrlCreate = 'http://127.0.0.1:8080/users/create'
+  readonly rootUrlAuthenticate = 'http://127.0.0.1:8080/users/authenticate'
   loggedIn : boolean = false;
 
   constructor(private http: HttpClient) { }
 
   registerUser(user: User){
     const body: User = {
-      userName : user.userName,
-      password : user.password,
       firstName : user.firstName,
       surName : user.surName,
+      password : user.password,
       email : user.email
     }
-    return this.http.post(this.rootUrlCreate, body).subscribe(res => console.log(res));
+    return this.http.post(this.rootUrl, body, {withCredentials: true}).subscribe();
   }
 
-  userAuthentication(userName, password){
-    var data = "?userName=" + userName + "&password=" + password;
-    return this.http.get(this.rootUrl + data);
+  userAuthentication(email, password): Observable<any>{
+    var data = "?email=" + email + "&password=" + password;
+    return this.http.post(this.rootUrlAuthenticate + data, null, {withCredentials:true, observe: 'response'});
   }
 
 }

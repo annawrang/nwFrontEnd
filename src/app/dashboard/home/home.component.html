@@ -1,3 +1,7 @@
-<p>
-  home works!
-</p>
+<div *ngFor="let postComplete of postCompletes">
+  <div class="post">
+  <p>User: {{postComplete.post.user.firstName}} {{postComplete.post.user.surName}}</p>
+  <p>Text: {{postComplete.post.text}}</p>
+  <p>Likes: {{postComplete.likes}}</p>
+</div>
+</div>

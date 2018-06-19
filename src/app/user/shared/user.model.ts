@@ -1,5 +1,4 @@
 export class User {
-    userName: String;
     firstName: String;
     surName: String;
     password: String;
@@ -7,3 +6,4 @@ export class User {
 
     constructor(){}
 }
+

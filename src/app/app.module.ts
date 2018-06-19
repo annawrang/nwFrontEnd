@@ -16,6 +16,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './dashboard/home/home.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { NetworksComponent } from './dashboard/networks/networks.component';
+import { FeedService } from './dashboard/home/feed.service';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { NetworksComponent } from './dashboard/networks/networks.component';
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [UserService, AuthGuard],
+  providers: [UserService, AuthGuard, FeedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

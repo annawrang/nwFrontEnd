@@ -11,16 +11,27 @@ import { Router } from '@angular/router';
 export class SignInComponent implements OnInit {
 
   private loginError : boolean = false;
+  private cookie1 : String;
 
   constructor(private userService : UserService, private router : Router) { }
 
   ngOnInit() {
   }
 
-  OnSubmit(userName, password){
-    this.userService.userAuthentication(userName, password).subscribe((data : any) => {
+  getCookie() : String {
+    return this.cookie1;
+  }
+
+  setCookie(cookie : String){
+    this.cookie1 = cookie;
+  }
+
+  OnSubmit(email, password){
+    this.userService.userAuthentication(email, password).subscribe(resp => {
+
+      console.log(resp);
+      console.log();
       this.router.navigate(['/dashboard']);
-      localStorage.setItem('userToken', 'hejTest');
     },
     (err : HttpErrorResponse)=>{
       this.loginError = true;
