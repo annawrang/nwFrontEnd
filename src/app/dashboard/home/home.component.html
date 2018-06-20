@@ -1,7 +1,17 @@
+
+<div class="newPost">
+  <h3>Post a new post</h3>
+  <input type="text" #inputText> 
+  <button class="btn-new-post" (click)="onPost(inputText.value)">Post</button>
+</div>
 <div *ngFor="let postComplete of postCompletes">
   <div class="post">
-  <p>User: {{postComplete.post.user.firstName}} {{postComplete.post.user.surName}}</p>
-  <p>Text: {{postComplete.post.text}}</p>
-  <p>Likes: {{postComplete.likes}}</p>
+  <div class="postUser"><p>User: {{postComplete.post.user.firstName}} {{postComplete.post.user.surName}}</p></div>
+  <div class="postText"><p>Text: {{postComplete.post.text}}</p></div>
+  <div class="postLikes">
+      <button class="btn-like" (click)="onLike(postComplete.post.postNumber)">Like</button> 
+      {{postComplete.likes}}</div>
+  <button class="edit">Edit</button>
+  <button class="delete">Delete</button>
 </div>
 </div>

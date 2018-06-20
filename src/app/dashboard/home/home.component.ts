@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedService } from './feed.service';
 import { UserMinimum } from '../user-minimum.model';
+import { IPostComplete } from './post.model';
+import { Post } from './post.model';
 
 @Component({
   selector: 'app-home',
@@ -19,5 +21,31 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  onLike(postNumber: string){
+    console.log("postComplete har KLICKATS PÅ LIKE" + postNumber)
+    this.feedService.newLike(postNumber).subscribe(data => {
+      console.log(data)
+    })
+  }
+
+  onPost(inputText: string){
+    const post: Post = {
+      user: {
+        userNumber: null,
+        firstName: null,
+        surName: null
+      },
+      text: inputText,
+      pictureUrl: null,
+      likes: null,
+      comments: null,
+      timestamp: null,
+      postNumber: null
+    }
+    console.log("Post new Post har klickats på!")
+    this.feedService.createNewPost(post).subscribe(data => {
+      console.log(data)
+    })
+  }
 
 }

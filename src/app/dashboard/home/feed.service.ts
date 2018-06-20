@@ -15,7 +15,10 @@ export class FeedService {
 
   constructor(private http: HttpClient) { }
 
-  createNewPost(){}
+  createNewPost(post: Post): Observable<any>{
+    var data = "?userNumber=396d0b5c-6291-4fc1-9e7d-5c61ce7fb328"
+    return this.http.post(this.rootUrl + data, post, {observe: "response"});
+  }
 
   editPost(){}
 
@@ -29,6 +32,12 @@ export class FeedService {
   nextPage(){
     this.page += 1;
     this.getPostFeed();
+  }
+
+  newLike(postNumber: string): Observable<any>{
+    var likeData = '/' + postNumber + '/likes?userNumber=' + '396d0b5c-6291-4fc1-9e7d-5c61ce7fb328'
+    console.log("anropar " + this.rootUrl + likeData)
+    return this.http.post(this.rootUrl + likeData, null,{withCredentials:true, observe: 'response'});
   }
 
 }

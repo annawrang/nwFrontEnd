@@ -11,18 +11,18 @@ import { Router } from '@angular/router';
 export class SignInComponent implements OnInit {
 
   private loginError : boolean = false;
-  private cookie1 : String;
+  private cookie1 : string;
 
   constructor(private userService : UserService, private router : Router) { }
 
   ngOnInit() {
   }
 
-  getCookie() : String {
+  getCookie() : string {
     return this.cookie1;
   }
 
-  setCookie(cookie : String){
+  setCookie(cookie : string){
     this.cookie1 = cookie;
   }
 

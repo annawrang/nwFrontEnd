@@ -2,12 +2,13 @@ import { UserMinimumInterface } from '../user-minimum.model';
 import { PostComment } from "../post-comment.model";
 
 export class Post { 
-    text: String
-    pictureUrl: String
+    text: string
+    pictureUrl: string
     user: UserMinimumInterface
     likes: Number
     comments: PostComment[]
     timestamp: Date
+    postNumber: string
 }
 
 
