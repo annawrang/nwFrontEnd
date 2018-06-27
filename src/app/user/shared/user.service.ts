@@ -15,6 +15,7 @@ interface UserResponse{
 @Injectable()
 export class UserService {
   readonly rootUrl = 'http://127.0.0.1:8080/users'
+  readonly rootUrlSignUp = 'http://127.0.0.1:8080/users/signup'
   readonly rootUrlAuthenticate = 'http://127.0.0.1:8080/users/authenticate'
   loggedIn : boolean = false;
 
@@ -27,12 +28,13 @@ export class UserService {
       password : user.password,
       email : user.email
     }
-    return this.http.post(this.rootUrl, body, {withCredentials: true}).subscribe();
+    return this.http.post(this.rootUrlSignUp, body, {withCredentials: true}).subscribe();
   }
 
   userAuthentication(email, password): Observable<any>{
     var data = "?email=" + email + "&password=" + password;
-    return this.http.post(this.rootUrlAuthenticate + data, null, {withCredentials:true, observe: 'response'});
+    return this.http.post(this.rootUrlAuthenticate + data, null, 
+      {observe: 'response'});
   }
 
 }

@@ -12,14 +12,15 @@ export class SignInComponent implements OnInit {
 
   private loginError : boolean = false;
   private cookie1 : string;
+  private jwtToken : string;
 
   constructor(private userService : UserService, private router : Router) { }
 
   ngOnInit() {
   }
 
-  getCookie() : string {
-    return this.cookie1;
+  getJwtToken() : string {
+    return this.jwtToken;
   }
 
   setCookie(cookie : string){
@@ -28,9 +29,7 @@ export class SignInComponent implements OnInit {
 
   OnSubmit(email, password){
     this.userService.userAuthentication(email, password).subscribe(resp => {
-
-      console.log(resp);
-      console.log();
+      sessionStorage.setItem('jwtToken', 'Bearer ' + resp.headers.get('Auth-Token'))
       this.router.navigate(['/dashboard']);
     },
     (err : HttpErrorResponse)=>{
