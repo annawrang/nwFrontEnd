@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    if (localStorage.getItem('userToken') != null)
+    if (sessionStorage.getItem('jwtToken') != null)
       return true;
     this.router.navigate(['/login/sign-in']);
     return false;

@@ -23,16 +23,16 @@ export class SignInComponent implements OnInit {
     return this.jwtToken;
   }
 
-  setCookie(cookie : string){
-    this.cookie1 = cookie;
-  }
-
   OnSubmit(email, password){
     this.userService.userAuthentication(email, password).subscribe(resp => {
       sessionStorage.setItem('jwtToken', 'Bearer ' + resp.headers.get('Auth-Token'))
+      sessionStorage.setItem('userNumber', resp.headers.get('Usernumber'))
+      console.log(sessionStorage.getItem('jwtToken'))
+      console.log(sessionStorage.getItem('userNumber'))
       this.router.navigate(['/dashboard']);
     },
     (err : HttpErrorResponse)=>{
+      console.log('error')
       this.loginError = true;
     }); 
   }

@@ -17,6 +17,7 @@ import { HomeComponent } from './dashboard/home/home.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { NetworksComponent } from './dashboard/networks/networks.component';
 import { FeedService } from './dashboard/home/feed.service';
+import { PostComponent } from './dashboard/post/post.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { FeedService } from './dashboard/home/feed.service';
     HomeComponent,
     ProfileComponent,
     NetworksComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,

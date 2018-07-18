@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  private userNumber = sessionStorage.getItem('userNumber');
 
   constructor(private user:UserService, private router : Router) { }
 
@@ -17,6 +18,9 @@ export class DashboardComponent implements OnInit {
 
   logout(){
     sessionStorage.clear();
+    console.log(sessionStorage.getItem('jwtToken'))
+    console.log(sessionStorage.getItem('userNumber'))
+    this.userNumber = ''
     this.router.navigate(['/login/sign-in']);
   }
 

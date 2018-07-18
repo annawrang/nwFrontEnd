@@ -7,23 +7,30 @@ import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './dashboard/home/home.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { NetworksComponent } from './dashboard/networks/networks.component';
+import { PostComment } from './dashboard/post-comment.model';
+import { PostComponent } from './dashboard/post/post.component';
 
 
 export const appRoutes: Routes = [
-    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
+    {
+        path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
         children: [
-            { path: 'home', component: HomeComponent},
-            { path: 'profile', component: ProfileComponent},
-            { path: 'networks', component: NetworksComponent},
-            { path: '', redirectTo: 'home', pathMatch: 'full'},
-            { path: '**', redirectTo: 'home', pathMatch: 'full'}
-        ] },
-    { path: 'login', component: UserComponent,
+            { path: 'home', component: HomeComponent },
+            { path: 'post/:id', component: PostComponent },
+            { path: 'profile/:id', component: ProfileComponent },
+            { path: 'networks', component: NetworksComponent },
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: '**', redirectTo: 'home', pathMatch: 'full' }
+        ]
+    },
+    {
+        path: 'login', component: UserComponent,
         children: [
             { path: 'sign-in', component: SignInComponent }
         ]
     },
-    { path: 'login', component: UserComponent,
+    {
+        path: 'login', component: UserComponent,
         children: [
             { path: 'sign-up', component: SignUpComponent }
         ]

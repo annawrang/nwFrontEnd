@@ -5,12 +5,12 @@ export class Post {
     text: string
     pictureUrl: string
     user: UserMinimumInterface
-    likes: Number
+    likes: number
     comments: PostComment[]
     timestamp: Date
     postNumber: string
+    isEditable: boolean
 }
-
 
 export interface IComment{
     user: UserMinimumInterface,
@@ -25,6 +25,7 @@ export interface IComment{
     pictureUrl: string,
     timestamp: Date,
     postNumber: string
+    isEditable: boolean
   }
   
   export interface IPostComplete{

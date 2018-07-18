@@ -15,6 +15,7 @@ export class FeedService {
   private page = 1
   private _headersToken = new HttpHeaders().set('Content-Type', 'application/json')
                                         .set('Authorization', sessionStorage.getItem('jwtToken'))
+                                        
 
   constructor(private http: HttpClient) { }
 
@@ -22,9 +23,15 @@ export class FeedService {
     return this.http.post(this.rootUrl, post, {observe: "response", headers: this._headersToken});
   }
 
-  editPost(){}
+  editPost(postNumber: string, newText: string): Observable<any>{
+    var data = '/' + postNumber
+    return this.http.put(this.rootUrl + data, newText,{headers: this._headersToken, observe: 'response'});
+  }
 
-  deletePost(){}
+  deletePost(postNumber: string): Observable<any>{
+    var data = '/' + postNumber
+    return this.http.delete(this.rootUrl + data, {headers: this._headersToken, observe: 'response'});
+  }
 
   getPostFeed(): Observable<IPostComplete>{
     var data = '?page=' + this.page;
