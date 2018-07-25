@@ -18,6 +18,8 @@ import { ProfileComponent } from './dashboard/profile/profile.component';
 import { NetworksComponent } from './dashboard/networks/networks.component';
 import { FeedService } from './dashboard/home/feed.service';
 import { PostComponent } from './dashboard/post/post.component';
+import { ProfileService } from './dashboard/profile/profile.service';
+
 
 
 @NgModule({
@@ -38,7 +40,7 @@ import { PostComponent } from './dashboard/post/post.component';
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [UserService, AuthGuard, FeedService],
+  providers: [UserService, AuthGuard, FeedService, ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

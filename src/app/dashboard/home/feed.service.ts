@@ -38,6 +38,11 @@ export class FeedService {
     return this.http.get<IPostComplete>(this.rootUrl + data, {headers: this._headersToken});
   }
 
+  getPost(postNumber: string): Observable<IPostComplete>{
+    var data = '/' + postNumber
+    return this.http.get<IPostComplete>(this.rootUrl + data, {headers: this._headersToken});
+  }
+
   nextPage(){
     this.page += 1;
     this.getPostFeed();
@@ -47,6 +52,11 @@ export class FeedService {
     var likeData = '/' + postNumber + '/likes'
     console.log("anropar " + this.rootUrl + likeData)
     return this.http.post(this.rootUrl + likeData, null,{headers: this._headersToken, observe: 'response'});
+  }
+
+  commentPost(postNumber: string, newComment: string){
+    var newCommentData = '/' + postNumber + '/comments'
+    return this.http.post(this.rootUrl + newCommentData, newComment,{headers: this._headersToken, observe: 'response'});
   }
 
 }

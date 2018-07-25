@@ -1,4 +1,33 @@
-<p>
-  Test igen
-</p>
+<!-- MY PROFILE -->
+<div *ngIf="isMyProfile === true">
+  <p>MY profile</p>
+<div class="profile-name">
+  Name: {{profile.user.firstName}} {{profile.user.surName}}
+</div>
+
+
+  <div class="description">
+    <div *ngIf="!descriptionIsEditable">
+    Description: {{profile.description}}
+  </div>
+  <div *ngIf="descriptionIsEditable == true">
+      Description: <textarea #newDescription>{{profile.description}}</textarea>
+      <button class="postEdit" (click)="onEditDescription(newDescription.value)">Finished editing</button>
+    </div>
+  </div>
+  <button class="edit" (click)="makeDescriptionEditable()">Edit</button>
+</div>
+
+
+
+<!-- OTHER PERSONS PROFILE -->
+<div *ngIf="isMyProfile === false">
+  <p>SOMEONE ELSES profile</p>
+  <div class="profile-name">
+      Name: {{profile.user.firstName}} {{profile.user.surName}}
+    </div>
+  <div class="description">
+      Description: {{profile.description}}
+    </div>
+</div>
 

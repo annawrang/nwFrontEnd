@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import { ProfileService } from "./profile.service";
 
 @Component({
   selector: 'app-profile',
@@ -7,21 +8,44 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  firstName: string
-  surName: string
-  description: string
+  private profileUserNumber
+  private profile
+  private isMyProfile = false
+  private descriptionIsEditable: boolean
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private profileService: ProfileService) {
     this.route.params.subscribe( params => console.log(params) );
+    this.profileUserNumber = route.snapshot.params["id"];
+
+    if(this.profileUserNumber === sessionStorage.getItem('userNumber')){
+      this.isMyProfile = true
+    } 
+    this.descriptionIsEditable = false
+
+    console.log('minProfil: ' + this.isMyProfile)
+
+    this.getProfileDetails(this.profileUserNumber)
   }
 
   ngOnInit() {
-    console.log('PROFILE!!!');
-    
   }
 
-  getProfileDetails(){
-    // här ska ett anrop till API göra för att få namn etc.
+  getProfileDetails(profileUserNumber: string){
+    this.profileService.getProfile(profileUserNumber).subscribe( data =>{
+      this.profile = data
+    })
+  }
+
+  onEditDescription(newDescription: string){
+    this.descriptionIsEditable = false
+    console.log('ny description ' + newDescription)
+    this.profileService.editDescription(newDescription, this.profile).subscribe(data =>{
+      console.log(data)
+    })
+  }
+
+  makeDescriptionEditable(){
+    this.descriptionIsEditable = true
   }
 
 }

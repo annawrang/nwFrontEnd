@@ -10,6 +10,7 @@ export class Post {
     timestamp: Date
     postNumber: string
     isEditable: boolean
+    isCommentable: boolean
 }
 
 export interface IComment{

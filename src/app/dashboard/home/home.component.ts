@@ -19,9 +19,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.feedService.getPostFeed().subscribe(data =>{
       this.postCompletes = data
+      console.log(data)
       if(this.postCompletes != undefined){
         this.postCompletes.post.forEach(element => {
           element.isEditable = false
+          element.isCommentable = false
         });
       }
     })
@@ -31,7 +33,19 @@ export class HomeComponent implements OnInit {
     post.isEditable = true
     console.log('editar : ' + post.text)
     console.log('är editable : ' + post.isEditable)
+  }
 
+ 
+  makeCommentable(post: Post){
+    post.isCommentable = true
+    console.log('är commentable : ' + post.isCommentable)
+  }
+
+  onComment(post: Post, newComment: string){
+    post.isCommentable = false
+    this.feedService.commentPost(post.postNumber, newComment).subscribe(data =>{
+      console.log(data)
+    })
   }
 
   onEdit(post: Post, newText: string){
@@ -72,7 +86,8 @@ export class HomeComponent implements OnInit {
       comments: null,
       timestamp: null,
       postNumber: null,
-      isEditable: false
+      isEditable: false,
+      isCommentable: false
     }
     console.log("Post new Post har klickats på!")
     this.feedService.createNewPost(post).subscribe(data => {
