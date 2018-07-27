@@ -19,12 +19,12 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.feedService.getPostFeed().subscribe(data =>{
       this.postCompletes = data
-      console.log(data)
-      if(this.postCompletes != undefined){
-        this.postCompletes.post.forEach(element => {
-          element.isEditable = false
-          element.isCommentable = false
-        });
+        if(this.postCompletes != undefined){
+          this.postCompletes.forEach(element => {
+            element.post.isEditable = false
+            element.post.isCommentable = false
+            element.post.seeComments = false
+          });
       }
     })
   }
@@ -35,7 +35,17 @@ export class HomeComponent implements OnInit {
     console.log('är editable : ' + post.isEditable)
   }
 
- 
+ seeComments(post: Post){
+   if(post.seeComments == false){
+    post.seeComments = true
+   } else{
+     post.seeComments = false
+   }
+
+   console.log('see comments: ' + post.seeComments)
+
+ }
+
   makeCommentable(post: Post){
     post.isCommentable = true
     console.log('är commentable : ' + post.isCommentable)
@@ -59,12 +69,6 @@ export class HomeComponent implements OnInit {
     this.feedService.newLike(postNumber).subscribe(data => {
       console.log(data)
     })
-    this.feedService.getPostFeed().subscribe(data =>{
-      this.postCompletes = data
-      for (var i = 0; i < this.postCompletes.length; i++) { 
-        this.postCompletes.post.isEditable = false
-      }
-    })
   }
 
   onDelete(postNumber: string){
@@ -87,7 +91,8 @@ export class HomeComponent implements OnInit {
       timestamp: null,
       postNumber: null,
       isEditable: false,
-      isCommentable: false
+      isCommentable: false,
+      seeComments: false
     }
     console.log("Post new Post har klickats på!")
     this.feedService.createNewPost(post).subscribe(data => {

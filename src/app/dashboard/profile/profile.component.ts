@@ -38,7 +38,6 @@ export class ProfileComponent implements OnInit {
 
   onEditDescription(newDescription: string){
     this.descriptionIsEditable = false
-    console.log('ny description ' + newDescription)
     this.profileService.editDescription(newDescription, this.profile).subscribe(data =>{
       console.log(data)
     })

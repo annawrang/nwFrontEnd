@@ -11,6 +11,8 @@ export class Post {
     postNumber: string
     isEditable: boolean
     isCommentable: boolean
+    seeComments: boolean
+
 }
 
 export interface IComment{

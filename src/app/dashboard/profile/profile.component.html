@@ -1,5 +1,6 @@
 <!-- MY PROFILE -->
-<div *ngIf="isMyProfile === true">
+<div *ngIf="profile != undefined">
+<div *ngIf="isMyProfile === true" >
   <p>MY profile</p>
 <div class="profile-name">
   Name: {{profile.user.firstName}} {{profile.user.surName}}
@@ -30,4 +31,4 @@
       Description: {{profile.description}}
     </div>
 </div>
-
+</div>

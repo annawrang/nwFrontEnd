@@ -1,55 +1,85 @@
-<div class="newPost">
-  <h3>Post a new post</h3>
-  <input type="text" #inputText>
-  <button class="btn-new-post" (click)="onPost(inputText.value)">Post</button>
-</div>
-<div *ngFor="let postComplete of postCompletes">
-  <div class="post">
-    <div class="postUser">
-      <a routerLink="../profile/{{postComplete.post.user.userNumber}}">
-        <p>User: {{postComplete.post.user.firstName}} {{postComplete.post.user.surName}}</p>
-      </a>
-    </div>
-    <div class="postText">
+<div *ngIf="postCompletes != undefined">
+
+  <!-- WRITE NEW POST-->
+  <div class="newPost">
+    <h3>Post a new post</h3>
+    <input type="text" #inputText>
+    <button class="btn-new-post" (click)="onPost(inputText.value)">Post</button>
+  </div>
+
+  <!-- LIST OF POSTS -->
+  <div *ngFor="let postComplete of postCompletes">
+    <div class="post">
+
+      <!-- USER -->
+      <div class="postUser">
+        <a routerLink="../profile/{{postComplete.post.user.userNumber}}">
+          <p>User: {{postComplete.post.user.firstName}} {{postComplete.post.user.surName}}</p>
+        </a>
+      </div>
+
+      <!-- POST TEXT && IF EDITABLE-->
+      <div class="postText">
         <div *ngIf="!postComplete.post.isEditable">
-            <a routerLink="../post/{{postComplete.post.postNumber}}">
-        <p>Text: {{postComplete.post.text}}</p>
-      </a>
+          <a routerLink="../post/{{postComplete.post.postNumber}}">
+            <p>Text: {{postComplete.post.text}}</p>
+          </a>
+        </div>
+        <!-- Editable -->
+        <div *ngIf="postComplete.post.isEditable == true">
+          <textarea #newText>{{postComplete.post.text}}</textarea>
+          <button class="postEdit" (click)="onEdit(postComplete.post, newText.value)">Finished editing</button>
+        </div>
+
+        <!-- LIKES && COMMENTS-->
+        <div class="postLikes">Likes: {{postComplete.likes}}</div>
+        <div>
+          <button class="seeComment" (click)="seeComments(postComplete.post)">Comments: {{postComplete.comment.length}}</button>
+        </div>
+
+        <!--  LIKE BUTTON -->
       </div>
-      
-  
-      <div *ngIf="postComplete.post.isEditable == true">
-        <textarea #newText>{{postComplete.post.text}}</textarea>
-        <button class="postEdit" (click)="onEdit(postComplete.post, newText.value)">Finished editing</button>
+      <div class="likeButton">
+        <button class="btn-like" (click)="onLike(postComplete.post.postNumber)">Like</button>
       </div>
 
 
-      <div class="postLikes">Likes: {{postComplete.likes}}</div>
-      <div class="comments">Comments:</div>
-      
-      <!--  LIKE -->
-    </div>
-    <div class="likeButton">
-      <button class="btn-like" (click)="onLike(postComplete.post.postNumber)">Like</button>
-    </div>
-
-
-       <!-- COMMENT -->
+      <!-- COMMENT BUTTON -->
       <div>
         <button class="comment" (click)="makeCommentable(postComplete.post)">Comment</button>
       </div>
 
-            <!--  EDIT   -->
-    <div *ngIf="postComplete.post.user.userNumber == uNumber">
-      <button class="edit" (click)='makeEditable(postComplete.post)'>Edit</button>
-    </div>
-    <div *ngIf="postComplete.post.user.userNumber == uNumber">
-      <button class="delete" (click)="onDelete(postComplete.post.postNumber)">Delete</button>
-    </div>
+      <!--  EDIT POST  -->
+      <div *ngIf="postComplete.post.user.userNumber == uNumber">
+        <button class="edit" (click)='makeEditable(postComplete.post)'>Edit</button>
+      </div>
 
-    <div *ngIf="postComplete.post.isCommentable">
-      <textarea #newComment></textarea>
-      <button class="postComment" (click)="onComment(postComplete.post, newComment.value)">Post comment</button>
-    </div>
+      <!-- DELETE BUTTON-->
+      <div *ngIf="postComplete.post.user.userNumber == uNumber">
+        <button class="delete" (click)="onDelete(postComplete.post.postNumber)">Delete</button>
+      </div>
 
+      <!-- WRITE NEW COMMENT-BOX-->
+      <div *ngIf="postComplete.post.isCommentable">
+        <textarea #newComment></textarea>
+        <button class="postComment" (click)="onComment(postComplete.post, newComment.value)">Post comment</button>
+      </div>
+
+      <!-- SEE COMMENTS -->
+      <div class="commentSection" *ngIf="postComplete.post.seeComments">
+        <div class="eachComment" *ngFor="let comment of postComplete.comment | slice:0:3">
+          USER: {{comment.user.firstName}} {{comment.user.surName}} 
+          KOMMENTAR: {{comment.text}}
+        </div>
+        <div *ngIf="postComplete.comment.length > 3">  
+            <a routerLink="../post/{{postComplete.post.postNumber}}">
+            <button class="seeAllComments" >See all</button>
+            </a>
+          </div>
+      </div>
+
+
+
+
+    </div>
   </div>

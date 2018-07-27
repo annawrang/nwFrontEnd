@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Timestamp} from 'rxjs';
 import { UserMinimumInterface } from '../user-minimum.model';
 import { HttpHeaders } from '@angular/common/http';
+import { Profile } from './profile.model';
 
 @Injectable()
 export class ProfileService {
@@ -19,10 +20,9 @@ export class ProfileService {
 
 
   editDescription(newDescription: string, profile): Observable<any>{
-
-    profile.desciption = newDescription
-    var newDescriptionData = this.rootUrl + '/' + profile.user.userNumber
-    return this.http.put(this.rootUrl + newDescriptionData, newDescription,{headers: this._headersToken, observe: 'response'});
+    profile.description = newDescription
+    var newDescriptionData = '/' + profile.user.userNumber
+    return this.http.put(this.rootUrl + newDescriptionData, profile,{headers: this._headersToken, observe: 'response'});
   }
 
 
