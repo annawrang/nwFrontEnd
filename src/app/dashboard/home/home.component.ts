@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
+
   makeEditable(post: Post){
     post.isEditable = true
     console.log('editar : ' + post.text)
@@ -74,6 +75,21 @@ export class HomeComponent implements OnInit {
   onDelete(postNumber: string){
     this.feedService.deletePost(postNumber).subscribe(data =>{
       console.log(data)
+    })
+  }
+
+  loadMorePosts(){
+    this.feedService.nextPage()
+    this.feedService.getPostFeed().subscribe(data =>{
+      console.log(data)
+      this.postCompletes = this.postCompletes.concat(data)
+      if(this.postCompletes != undefined){
+        this.postCompletes.forEach(element => {
+          element.post.isEditable = false
+          element.post.isCommentable = false
+          element.post.seeComments = false
+        });
+    }
     })
   }
 

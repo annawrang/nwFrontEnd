@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
   private profile
   private isMyProfile = false
   private descriptionIsEditable: boolean
+  private allDataFetched = false
 
   constructor(private route: ActivatedRoute, private profileService: ProfileService) {
     this.route.params.subscribe( params => console.log(params) );
@@ -21,9 +22,6 @@ export class ProfileComponent implements OnInit {
       this.isMyProfile = true
     } 
     this.descriptionIsEditable = false
-
-    console.log('minProfil: ' + this.isMyProfile)
-
     this.getProfileDetails(this.profileUserNumber)
   }
 
@@ -33,6 +31,7 @@ export class ProfileComponent implements OnInit {
   getProfileDetails(profileUserNumber: string){
     this.profileService.getProfile(profileUserNumber).subscribe( data =>{
       this.profile = data
+      this.allDataFetched = true
     })
   }
 

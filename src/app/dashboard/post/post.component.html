@@ -1,48 +1,68 @@
+<div *ngIf="postComplete != undefined">
+  <div class="post">
 
-    <div class="post">
-      <div class="postUser">
-          <p>User: {{postComplete.post.user.firstName}} {{postComplete.post.user.surName}}</p>
-      </div>
-      <div class="postText">
-          <div *ngIf="!postComplete.post.isEditable">
-              <a routerLink="../post/{{postComplete.post.postNumber}}">
+          <!-- USER -->
+    <div class="postUser">
+      <a routerLink="../profile/{{postComplete.post.user.userNumber}}">
+        <p>User: {{postComplete.post.user.firstName}} {{postComplete.post.user.surName}}</p>
+      </a>
+    </div>
+
+          <!-- POST TEXT && IF EDITABLE-->
+    <div class="postText">
+      <div *ngIf="!postComplete.post.isEditable">
+        <a routerLink="../post/{{postComplete.post.postNumber}}">
           <p>Text: {{postComplete.post.text}}</p>
         </a>
-        </div>
-        
-    
-        <div *ngIf="postComplete.post.isEditable == true">
-          <textarea #newText>{{postComplete.post.text}}</textarea>
-          <button class="postEdit" (click)="onEdit(postComplete.post, newText.value)">Finished editing</button>
-        </div>
-  
-  
-        <div class="postLikes">Likes: {{postComplete.likes}}</div>
-        <div class="comments">Comments:</div>
-        
-        <!--  LIKE -->
       </div>
-      <div class="likeButton">
-        <button class="btn-like" (click)="onLike(postComplete.post.postNumber)">Like</button>
+
+        <!-- Editable -->
+      <div *ngIf="postComplete.post.isEditable == true">
+        <textarea #newText>{{postComplete.post.text}}</textarea>
+        <button class="postEdit" (click)="onEdit(postComplete.post, newText.value)">Finished editing</button>
       </div>
-  
-  
-         <!-- COMMENT -->
-        <div>
-          <button class="comment" (click)="makeCommentable(postComplete.post)">Comment</button>
-        </div>
-  
-              <!--  EDIT   -->
-      <div *ngIf="postComplete.post.user.userNumber == uNumber">
-        <button class="edit" (click)='makeEditable(postComplete.post)'>Edit</button>
+
+
+              <!-- LIKES && COMMENTS-->
+      <div class="postLikes">Likes: {{postComplete.likes}}</div>
+      <div>
+        <button class="seeComment">Comments: {{postComplete.comment.length}}</button>
       </div>
-      <div *ngIf="postComplete.post.user.userNumber == uNumber">
-        <button class="delete" (click)="onDelete(postComplete.post.postNumber)">Delete</button>
-      </div>
-  
-      <div *ngIf="postComplete.post.isCommentable">
-        <textarea #newComment></textarea>
-        <button class="postComment" (click)="onComment(postComplete.post, newComment.value)">Post comment</button>
-      </div>
-  
+
+      <!--  LIKE BUTTON -->
     </div>
+    <div class="likeButton">
+      <button class="btn-like" (click)="onLike(postComplete.post.postNumber)">Like</button>
+    </div>
+
+
+    <!-- COMMENT BUTTON-->
+    <div>
+      <button class="comment" (click)="makeCommentable(postComplete.post)">Comment</button>
+    </div>
+
+    <!--  EDIT POST BUTTON  -->
+    <div *ngIf="postComplete.post.user.userNumber == uNumber">
+      <button class="edit" (click)='makeEditable(postComplete.post)'>Edit</button>
+    </div>
+
+          <!-- DELETE BUTTON-->
+    <div *ngIf="postComplete.post.user.userNumber == uNumber">
+      <button class="delete" (click)="onDelete(postComplete.post.postNumber)">Delete</button>
+    </div>
+
+          <!-- WRITE NEW COMMENT-BOX-->
+    <div *ngIf="postComplete.post.isCommentable">
+      <textarea #newComment></textarea>
+      <button class="postComment" (click)="onComment(postComplete.post, newComment.value)">Post comment</button>
+    </div>
+
+    <!-- LIST OF COMMENTS -->
+    <div class="commentSection">
+      <div class="eachComment" *ngFor="let comment of postComplete.comment | slice:0:30">
+        USER: {{comment.user.firstName}} {{comment.user.surName}} KOMMENTAR: {{comment.text}}
+      </div>
+    </div>
+
+  </div>
+</div>

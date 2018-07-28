@@ -19,6 +19,7 @@ import { NetworksComponent } from './dashboard/networks/networks.component';
 import { FeedService } from './dashboard/home/feed.service';
 import { PostComponent } from './dashboard/post/post.component';
 import { ProfileService } from './dashboard/profile/profile.service';
+import { PostService } from './dashboard/post/post.service';
 
 
 
@@ -40,7 +41,7 @@ import { ProfileService } from './dashboard/profile/profile.service';
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [UserService, AuthGuard, FeedService, ProfileService],
+  providers: [UserService, AuthGuard, FeedService, ProfileService, PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

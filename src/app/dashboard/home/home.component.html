@@ -7,9 +7,19 @@
     <button class="btn-new-post" (click)="onPost(inputText.value)">Post</button>
   </div>
 
+  <div>
+    <p>Filter posts</p>
+    <button>Tech</button>
+    <button>KOMMER SENARE</button>
+  </div>
+
   <!-- LIST OF POSTS -->
   <div *ngFor="let postComplete of postCompletes">
     <div class="post">
+
+      <div class="postDate">
+        Date: {{postComplete.post.creationTimestamp || date }
+      </div>
 
       <!-- USER -->
       <div class="postUser">
@@ -78,8 +88,7 @@
           </div>
       </div>
 
-
-
-
     </div>
   </div>
+
+  <button class="loadMorePosts" (click)="loadMorePosts()">Load more...</button>
