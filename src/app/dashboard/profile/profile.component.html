@@ -6,10 +6,14 @@
   Name: {{profile.user.firstName}} {{profile.user.surName}}
 </div>
 
+<div>
+  Title: {{profile.user.workTitle}}
+</div>
+
 
   <div class="description">
     <div *ngIf="!descriptionIsEditable">
-    Description: {{profile.description}}
+    Interests: {{profile.description}}
   </div>
   <div *ngIf="descriptionIsEditable == true">
       Description: <textarea #newDescription>{{profile.description}}</textarea>

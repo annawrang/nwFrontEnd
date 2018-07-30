@@ -4,6 +4,7 @@ import { Response } from '@angular/http';
 import { Post } from './post.model';
 import { Observable, Timestamp} from 'rxjs';
 import { UserMinimumInterface } from '../user-minimum.model';
+import { MiniUserFeed } from '../user-minimum.model';
 
 import { IPostComplete } from './post.model';
 import { HttpHeaders } from '@angular/common/http';
@@ -12,12 +13,19 @@ import { HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class FeedService {
   readonly rootUrl = 'http://127.0.0.1:8080/posts'
+  readonly userUrl = 'http://127.0.0.1:8080/profile'
   private page = 1
+  private userNumber = sessionStorage.getItem('userNumber')
   private _headersToken = new HttpHeaders().set('Content-Type', 'application/json')
                                         .set('Authorization', sessionStorage.getItem('jwtToken'))
                                         
 
   constructor(private http: HttpClient) { }
+
+  getMiniUser(): Observable<MiniUserFeed>{
+    var data = '/' + this.userNumber
+    return this.http.get<MiniUserFeed>(this.userUrl + data, {headers: this._headersToken})
+  }
 
   createNewPost(post: Post): Observable<any>{
     return this.http.post(this.rootUrl, post, {observe: "response", headers: this._headersToken});

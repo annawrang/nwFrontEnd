@@ -13,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class HomeComponent implements OnInit {
   public postCompletes;
   public uNumber = sessionStorage.getItem('userNumber')
+  private miniUser;
 
   constructor(private feedService: FeedService) { }
 
@@ -26,6 +27,11 @@ export class HomeComponent implements OnInit {
             element.post.seeComments = false
           });
       }
+    })
+
+    this.feedService.getMiniUser().subscribe(data =>{
+      this.miniUser = data
+      console.log(data)
     })
   }
 

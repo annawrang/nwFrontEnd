@@ -18,6 +18,7 @@ export class WelcomeComponent implements OnInit {
   private user: User;
   modalReference: any;
 
+
   constructor(private modalService: NgbModal, private userService: UserService, private router: Router) { }
 
   ngOnInit() {

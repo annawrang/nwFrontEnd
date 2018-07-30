@@ -13,3 +13,9 @@ export interface UserMinimumInterface{
     surName: string,
     userNumber: string
   }
+
+  export interface MiniUserFeed{
+    description: string,
+    workTitle: string,
+    user: UserMinimum
+  }
