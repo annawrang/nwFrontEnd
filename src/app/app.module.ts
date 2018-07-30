@@ -9,7 +9,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { appRoutes } from './routes';
 import { UserComponent } from './welcome/user.component';
-import { SignInComponent } from './welcome/sign-in/sign-in.component';
+import { SignInComponent } from './welcomePage/popups/sign-in/sign-in.component';
 import { SignUpComponent } from './welcome/sign-up/sign-up.component';
 import { UserService } from './welcomePage/popups/sharedServices/user.service';
 import { AuthGuard } from './auth/auth.guard';

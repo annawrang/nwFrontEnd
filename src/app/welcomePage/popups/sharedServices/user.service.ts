@@ -21,14 +21,14 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(user: User){
+  registerUser(user: User): Observable<any>{
     const body: User = {
       firstName : user.firstName,
       surName : user.surName,
       password : user.password,
       email : user.email
     }
-    return this.http.post(this.rootUrlSignUp, body, {withCredentials: true}).subscribe();
+    return this.http.post(this.rootUrlSignUp, body, {});
   }
 
   userAuthentication(email, password): Observable<any>{

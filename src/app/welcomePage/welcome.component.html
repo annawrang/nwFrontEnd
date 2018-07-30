@@ -27,9 +27,10 @@
   <form #loginForm="ngForm">
         <input type="text" #userEmail name="userEmail" placeholder="Email">
         <input type="password" #password name="password" placeholder="Password">
-        <button type="submit" (click)="loginUser(userEmail.value, password.value)">Log in</button>
+        <button type="submit" (click)="loginUser(login, userEmail.value, password.value)">Log in</button>
  </form>
 </ng-template>
+
 
 <ng-template #signup let-d="dismiss">
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">Close</button>
