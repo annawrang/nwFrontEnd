@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../user/shared/user.service';
+import { UserService } from '../welcomePage/popups/sharedServices/user.service';
 import { Router } from '@angular/router';
 
 

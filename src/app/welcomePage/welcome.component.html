@@ -1,0 +1,51 @@
+<a routerLink="./home" RouterLinkActive="active">
+  ICON</a>
+
+  <button (click)="openSignUp(signup)">Sign up</button>
+  <button (click)="openLogIn(login)">Log in</button>
+  
+
+<router-outlet></router-outlet>
+
+<ul class="nav" RouterLinkActive="active">
+  <li class="tab">
+    <a routerLink="./about">About us</a>
+  </li>
+  <li>
+    <a routerLink="./terms">Terms & Conditions</a>
+  </li>
+  <li>
+    <a routerLink="./privacy">Privacy Policy</a>
+  </li>
+</ul>
+
+
+
+<ng-template #login let-c="close" let-d="dismiss">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">Close</button>
+    <div *ngIf="loginError">Incorrect email or password</div>
+  <form #loginForm="ngForm">
+        <input type="text" #userEmail name="userEmail" placeholder="Email">
+        <input type="password" #password name="password" placeholder="Password">
+        <button type="submit" (click)="loginUser(userEmail.value, password.value)">Log in</button>
+ </form>
+</ng-template>
+
+<ng-template #signup let-d="dismiss">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">Close</button>
+    <form #UserRegistrationForm="ngForm" (ngSubmit)="registerUser(UserRegistrationForm)">
+              <input type="text" name="firstName" #userName="ngModel" [ngModel]="user?.firstName">
+              <label>firstName</label>
+
+              <input type="text" name="surName" #userName="ngModel" [ngModel]="user?.surName">
+              <label>surName</label>
+
+              <input type="text" name="email" #userName="ngModel" [ngModel]="user?.email">
+              <label>email</label>
+
+            <input type="password" name="password" #password="ngModel" [ngModel]="user?.password">
+            <label>password</label>
+
+          <button class="btn-submit btn-large" type="submit">Submit</button>
+    </form>
+  </ng-template>

@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 import { Post } from './post.model';
 import { Observable, Timestamp} from 'rxjs';
 import { UserMinimumInterface } from '../user-minimum.model';
-import { timestamp } from 'rxjs/operator/timestamp';
+
 import { IPostComplete } from './post.model';
 import { HttpHeaders } from '@angular/common/http';
 

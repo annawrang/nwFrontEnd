@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../shared/user.service';
+import { UserService } from '../../welcomePage/popups/sharedServices/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -11,16 +11,11 @@ import { Router } from '@angular/router';
 export class SignInComponent implements OnInit {
 
   private loginError : boolean = false;
-  private cookie1 : string;
   private jwtToken : string;
 
   constructor(private userService : UserService, private router : Router) { }
 
   ngOnInit() {
-  }
-
-  getJwtToken() : string {
-    return this.jwtToken;
   }
 
   OnSubmit(email, password){
