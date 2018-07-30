@@ -1,0 +1,11 @@
+<p>List of networks</p>
+
+<div class="networks" *ngFor="let network of networks">
+  <a href={{network.link}}>
+  <h3>{{network.name}}</h3></a>
+  <div>{{network.country}} - {{network.city}}</div>
+  <div>
+        {{network.description}}
+  
+  </div>
+</div>

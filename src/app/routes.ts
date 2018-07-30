@@ -6,7 +6,7 @@ import { SignUpComponent } from './welcome/sign-up/sign-up.component';
 import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './dashboard/home/home.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
-import { NetworksComponent } from './dashboard/networks/networks.component';
+import { NetworkComponent } from './dashboard/network/network.component';
 import { PostComment } from './dashboard/post-comment.model';
 import { PostComponent } from './dashboard/post/post.component';
 import { WelcomeComponent } from './welcomePage/welcome.component';
@@ -23,7 +23,7 @@ export const appRoutes: Routes = [
             { path: 'home', component: HomeComponent },
             { path: 'post/:id', component: PostComponent },
             { path: 'profile/:id', component: ProfileComponent },
-            { path: 'networks', component: NetworksComponent },
+            { path: 'networks', component: NetworkComponent },
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: '**', redirectTo: 'home', pathMatch: 'full' }
         ]
