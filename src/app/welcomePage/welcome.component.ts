@@ -25,13 +25,19 @@ export class WelcomeComponent implements OnInit {
   }
 
   openSignUp(content) {
+    if(this.modalReference != undefined){
+      this.modalReference.close();
+    }
     this.modalReference = this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
   }
 
   openLogIn(content) {
+    if(this.modalReference != undefined){
+      this.modalReference.close();
+    }
     this.modalReference = this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
   }
-   
+
   closeModal(content){
     this.modalReference.close();
   }

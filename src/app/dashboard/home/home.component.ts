@@ -14,6 +14,9 @@ export class HomeComponent implements OnInit {
   public postCompletes;
   public uNumber = sessionStorage.getItem('userNumber')
   private miniUser;
+  private tempNewPost: Post = new Post
+  private selectedImage;
+
 
   constructor(private feedService: FeedService) { }
 
@@ -52,6 +55,8 @@ export class HomeComponent implements OnInit {
    console.log('see comments: ' + post.seeComments)
 
  }
+
+
 
   makeCommentable(post: Post){
     post.isCommentable = true
@@ -99,6 +104,19 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  onImageChanged(event) {
+    this.selectedImage = event.target.files;
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.tempNewPost.pictureUrl = event.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+
+
   onPost(inputText: string){
     const post: Post = {
       user: {
@@ -107,7 +125,7 @@ export class HomeComponent implements OnInit {
         surName: null
       },
       text: inputText,
-      pictureUrl: null,
+      pictureUrl: this.tempNewPost.pictureUrl,
       likes: null,
       comments: null,
       timestamp: null,
@@ -116,7 +134,7 @@ export class HomeComponent implements OnInit {
       isCommentable: false,
       seeComments: false
     }
-    console.log("Post new Post har klickats på!")
+
     this.feedService.createNewPost(post).subscribe(data => {
       console.log(data)
     })

@@ -3,7 +3,7 @@ import { PostComment } from "../post-comment.model";
 
 export class Post { 
     text: string
-    pictureUrl: string
+    pictureUrl
     user: UserMinimumInterface
     likes: number
     comments: PostComment[]
