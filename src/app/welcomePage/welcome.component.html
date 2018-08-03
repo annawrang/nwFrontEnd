@@ -37,67 +37,85 @@
 
 
 <div class="container">
-<ng-template #login let-c="close" let-d="dismiss">
-  <button type="button" class="close ml-auto" aria-label="Close" (click)="d('Cross click')">
+  <ng-template #login let-c="close" let-d="dismiss">
+    <button type="button" class="close ml-auto" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
-  </button>
-  <div *ngIf="loginError">Incorrect email or password</div>
-  <div class="mx-auto">
-    <h2>Log in</h2>
-  </div>
-  <form #loginForm="ngForm">
-    <div class="row">
-      <input type="text" #userEmail name="userEmail" placeholder="Email" class="rounded mx-auto">
+    </button>
+    <div *ngIf="loginError">Incorrect email or password</div>
+    <div class="mx-auto">
+      <h2>Log in</h2>
     </div>
-    <div class="row">
-    <input type="password" #password name="password" placeholder="Password" class="rounded mx-auto">
+    <form #loginForm="ngForm">
+      <div class="row">
+        <input type="text" #userEmail name="userEmail" placeholder="Email" class="rounded mx-auto">
+      </div>
+      <div class="row">
+        <input type="password" #password name="password" placeholder="Password" class="rounded mx-auto">
+      </div>
+      <div class="row">
+        <button type="submit" class="mx-auto" (click)="loginUser(login, userEmail.value, password.value)">Log in</button>
+      </div>
+      <div class="row">
+      Don't have an account?
+      <div (click)="openSignUp(signup)">Sign up</div>
     </div>
-    <div class="row">
-    <button type="submit" class="mx-auto" (click)="loginUser(login, userEmail.value, password.value)">Log in</button>
-    </div>
-    Don't have an account?
-    <div (click)="openSignUp(signup)">Sign up</div>
-  </form>
-</ng-template>
+    </form>
+  </ng-template>
 </div>
 
 
 <ng-template #signup let-d="dismiss">
-  <button type="button" class="close ml-auto"  aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
+  <button type="button" class="close ml-auto" aria-label="Close" (click)="d('Cross click')">
+    <span aria-hidden="true">&times;</span>
   </button>
 
+  <div *ngIf="signUpSuccess" class="row">
+    <p>Registation successful!</p>
+  </div>
+
   <div class="mx-auto">
-      <h2>Sign up</h2>
-    </div>
+    <h2>Sign up</h2>
+  </div>
 
-  <form #UserRegistrationForm="ngForm" (ngSubmit)="registerUser(UserRegistrationForm)">
+  <form #UserRegistrationForm="ngForm" (ngSubmit)="registerUser(UserRegistrationForm, passwordDouble.value); UserRegistrationForm.reset(); passwordDouble.value='';">
     <div class="row">
-    <input type="text" class="rounded mx-auto" name="firstName" placeholder="First name" #userName="ngModel" [ngModel]="user?.firstName">
-  </div>
+      <input type="text" class="rounded mx-auto" name="firstName" placeholder="First name" #userName="ngModel" [ngModel]="user?.firstName">
 
-  <div class="row">
-    <input type="text" class="rounded mx-auto" name="surName" placeholder="Surname" #userName="ngModel" [ngModel]="user?.surName">
-  </div>
-
-  <div class="row">
-    <input type="text" class="rounded mx-auto" name="email" placeholder="Email address" #userName="ngModel" [ngModel]="user?.email">
+      <input type="text" class="rounded mx-auto" name="surName" placeholder="Surname" #userName="ngModel" [ngModel]="user?.surName">
     </div>
 
     <div class="row">
-    <input type="password" class="rounded mx-auto" name="password" placeholder="Choose your password" #password="ngModel" [ngModel]="user?.password">
+      <input type="text" class="rounded mx-auto" name="email" placeholder="Email address" #userName="ngModel" [ngModel]="user?.email">
     </div>
+
+    <div class="row">
+      <input type="password" class="rounded mx-auto" name="password" placeholder="Choose your password" #password="ngModel" [ngModel]="user?.password">
+    </div>
+
+<div *ngIf="passwordsDontMatch" class="row">
+  <p>Passwords don't match</p>
+</div>
 
     <div class="row col-auto">
-    <input type="password" class="rounded mx-auto" name="passwordDouble" placeholder="Repeat password">
+      <input type="password" class="rounded mx-auto" #passwordDouble name="passwordDouble" placeholder="Repeat password">
     </div>
 
     <div class="row">
-    <button class="btn-submit btn-large mx-auto" type="submit">Sign up</button>
+      <input type="checkbox" #checkboxReadPolicy (click)="approvesPolicy()">
+      <p>I have read and agree to the Sisterside Privacy Policy and Terms & Conditions.</p>
     </div>
 
-    Already have an account?
-    <div (click)="openLogIn(login)">Log in</div>
+    <div *ngIf="needToApprovePolicy" class="row">
+      Please read and agree to the policies
+    </div>
+
+    <div class="row">
+      <button class="btn-submit btn-large mx-auto" type="submit">Sign up</button>
+    </div>
+    <div class="row">
+     <p> Already have an account? </p>
+      <div (click)="openLogIn(login)"> Log in</div>
+    </div>
   </form>
 </ng-template>
 

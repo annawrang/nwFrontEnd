@@ -22,10 +22,8 @@
         <div class="card">
           <div class="newPost">
 
-            <h3>What would you like to share, {{miniUser.user.firstName}}?</h3>
-
             <div class="row">
-              <input type="text" #inputText>
+              <input type="text" #inputText placeholder="What would you like to share, {{miniUser.user.firstName}}?">
             </div>
             <div class="row">
               <img *ngIf="selectedImage" [src]="tempNewPost.pictureUrl" width="180">
@@ -68,10 +66,20 @@
                 <div class="postUserImage">
                   USER IMAGE
                 </div>
-                <div class="postUser">
+
+
+                <div class="postUser col">
                   <a routerLink="../profile/{{postComplete.post.user.userNumber}}">
-                    <p>{{postComplete.post.user.firstName}} {{postComplete.post.user.surName}}</p>
+                    <div class="row">{{postComplete.post.user.firstName}} {{postComplete.post.user.surName}}</div>
+                    <div class="row">Java Developer</div>
                   </a>
+
+
+                  <!-- POST DATE -->
+                  <div class="postDate row">
+                    {{postComplete.post.date|date: 'd MMMM H:mm'}}
+                  </div>
+
                 </div>
 
                 <!-- MORE BUTTON -->
@@ -91,10 +99,6 @@
               </div>
 
 
-              <!-- POST DATE -->
-              <div class="postDate">
-                Date: {{postComplete.post.creationTimestamp}}
-              </div>
 
               <!-- POST TEXT && IF EDITABLE-->
               <div class="postText">
@@ -116,7 +120,7 @@
                 </div>
 
 
-              
+
                 <!--  LIKE BUTTON -->
               </div>
               <div class="likeButton">

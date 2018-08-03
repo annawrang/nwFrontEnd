@@ -7,12 +7,12 @@ export class Post {
     user: UserMinimumInterface
     likes: number
     comments: PostComment[]
-    timestamp: Date
+    date: Date
     postNumber: string
     isEditable: boolean
     isCommentable: boolean
     seeComments: boolean
-
+    formattedDate
 }
 
 export interface IComment{

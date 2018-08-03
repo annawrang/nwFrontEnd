@@ -14,8 +14,12 @@ import { User } from '../welcomePage/popups/sharedServices/user.model';
 })
 export class WelcomeComponent implements OnInit {
   private loginError: boolean = false;
+  private signUpSuccess: boolean = false;
   private jwtToken: string;
   private user: User;
+  private passwordsDontMatch: boolean = false;
+  private approvingPolicy: boolean = false;
+  private needToApprovePolicy: boolean = false;
   modalReference: any;
 
 
@@ -25,20 +29,29 @@ export class WelcomeComponent implements OnInit {
   }
 
   openSignUp(content) {
-    if(this.modalReference != undefined){
+    if (this.modalReference != undefined) {
       this.modalReference.close();
     }
     this.modalReference = this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
+  }
+
+  approvesPolicy() {
+    if (this.approvingPolicy == false) {
+      this.approvingPolicy = true
+      this.needToApprovePolicy = false
+    } else {
+      this.approvingPolicy = false
+    }
   }
 
   openLogIn(content) {
-    if(this.modalReference != undefined){
+    if (this.modalReference != undefined) {
       this.modalReference.close();
     }
     this.modalReference = this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
   }
 
-  closeModal(content){
+  closeModal(content) {
     this.modalReference.close();
   }
 
@@ -57,10 +70,25 @@ export class WelcomeComponent implements OnInit {
       });
   }
 
-  registerUser(form: NgForm){
-    this.userService.registerUser(form.value).subscribe( resp =>{
-      console.log(resp)
-    })
+  registerUser(form: NgForm, secondPassword: string) {
+    if (form.value.password == secondPassword) {
+      if (this.approvingPolicy == true) {
+        this.needToApprovePolicy = false
+        this.userService.registerUser(form.value).subscribe(resp => {
+          this.signUpSuccess = true;
+          console.log(resp)
+        },
+          (err: HttpErrorResponse) => {
+            console.log('error')
+          });
+      } else {
+        this.needToApprovePolicy = true
+      }
+    } else {
+      this.passwordsDontMatch = true
+    }
+
   }
+
 
 }

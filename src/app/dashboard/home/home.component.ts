@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
             element.post.isEditable = false
             element.post.isCommentable = false
             element.post.seeComments = false
+            
           });
       }
     })
@@ -37,6 +38,9 @@ export class HomeComponent implements OnInit {
       console.log(data)
     })
   }
+
+
+  
 
 
   makeEditable(post: Post){
@@ -128,11 +132,12 @@ export class HomeComponent implements OnInit {
       pictureUrl: this.tempNewPost.pictureUrl,
       likes: null,
       comments: null,
-      timestamp: null,
+      date: null,
       postNumber: null,
       isEditable: false,
       isCommentable: false,
-      seeComments: false
+      seeComments: false,
+      formattedDate: undefined
     }
 
     this.feedService.createNewPost(post).subscribe(data => {
