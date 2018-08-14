@@ -1,0 +1,40 @@
+<p>
+  Add tags (internal use) 
+  </p>
+  <label>CLick on button ONCE(!) to populate DB with countries</label>
+  <button (click)="onSubmitCountries()">Fill db whit countries</button>
+  <br>
+  <label>Reload page to choose country to add area too</label>
+  <form class="col" #CityTagRegistrationForm="ngForm" (ngSubmit)="OnSubmitCityTag(CityTagRegistrationForm)">
+      <div class="form-group">
+          <label>Select country to add area to </label>
+          <select class="form-control" #UpdateCountryCountryTag = "ngModel" [ngModel] ="UpdateCountry?.countryTag"  name="countryTag" required>
+            <option  [value] = "countryTag.name" *ngFor="let countryTag of tags.countryTags">{{countryTag.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+            <label>Add Area Tag (e.g Stockholm, Gotland, Östergötland)</label>
+            <input type="text" name="name" #UpdateCountryCityTag= "ngModel" [ngModel] ="UpdateCountry?.areaTag" class="form-control" name="areaTag">
+        </div>
+      <div class="row">
+          <div class="input-field">
+            <button class="btn-submit btn-large" type="submit">Submit</button>
+          </div>
+        </div>
+  </form>
+  
+  <form class="col" #ForTagRegistrationForm="ngForm" (ngSubmit)="OnSubmitForTag(ForTagRegistrationForm)">
+  
+    
+      <div class="form-group">
+        <label>Add tag for whom (e.g. Students, Workers)</label>
+        <input type="text" name="name" #networkName= "ngModel" [ngModel] ="forTag?.name" class="form-control" >
+      </div>
+      <div class="row">
+          <div class="input-field">
+            <button class="btn-submit btn-large" type="submit">Submit</button>
+          </div>
+        </div>
+  </form>
+  
+ 

@@ -1,0 +1,57 @@
+<p>
+  network-form works!
+</p>
+<p>
+  Add Network
+</p>
+<form class="col" #NetworkRegistrationForm="ngForm" (ngSubmit)="OnSubmit(NetworkRegistrationForm)">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" name="name" #networkName= "ngModel" [ngModel] ="network?.name" class="form-control" >
+    </div>
+    <div class="form-group">
+        <label>Description max XX symbols</label>
+        <textarea class="form-control" name="description" #networkDescription="ngModel" [ngModel] = "network?.description" rows="2"></textarea>
+    </div>
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input"#networkGlobal="ngModel" name="global" type="checkbox" [value]="global" [ngModel] = "network?.global" >
+        <label class="form-check-label" for="inlineCheckbox1">Check if network is global</label>
+      </div>
+    </div>
+    <div class="form-group">
+          <label>Country (can choose several)</label>
+        <select multiple  class="form-control" #networkCountryTagsName = "ngModel" [ngModel] ="network?.countryTags.name" name="countryTags" (ngModelChange)='onCountrySelected($event)'>
+            <option [value] = "countryTag.name" *ngFor="let countryTag of tags.countryTags">{{countryTag.name}}</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label>Area (can choose several)</label>
+        <select multiple disabled="{{selectDisabled}}"  class="form-control" #networkAreaTagsName = "ngModel" [ngModel] ="network?.countryTags.areaTags.name" name="areaTags">
+          <option [value] ="areaTag.name" *ngFor="let areaTag of areaTags">{{areaTag.name}}</option>   
+        </select>
+    </div>
+    <div class="form-group">
+        <label>For whom is the network(can choose several)</label>
+        <select  multiple class="form-control" #networkForTagsName = "ngModel" [ngModel] ="network?.forTags.name" name="forTags">
+          <option *ngFor="let forTags of tags.forTags"   >{{forTags.name}}</option>   
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Link</label>
+        <input type="text" name="link" #networkLink= "ngModel" [ngModel] ="network?.link" class="form-control" >
+      </div>
+      <div class="form-group">
+          <label>Picture URL (upload also?)</label>
+          <input type="text" name="pictureUrl" #networkName= "ngModel" [ngModel] ="network?.pictureUrl" class="form-control" >
+        </div>
+
+      <div class="row">
+          <div class="input-field">
+            <button class="btn-submit btn-large" type="submit">Submit</button>
+          </div>
+        </div><!-- disable the button -->
+  </form>
+
+

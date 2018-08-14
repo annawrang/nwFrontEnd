@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -27,9 +27,8 @@ import { PrivacyPolicyComponent } from './welcomePage/privacy-policy/privacy-pol
 import { AboutSistersideComponent } from './welcomePage/about-sisterside/about-sisterside.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NetworkComponent } from './dashboard/network/network.component';
-
-
-
+import { TagFormComponent } from './dashboard/network/tag-form/tag-form.component';
+import { NetworkFormComponent } from './dashboard/network/network-form/network-form.component';
 
 
 @NgModule({
@@ -48,11 +47,16 @@ import { NetworkComponent } from './dashboard/network/network.component';
     PrivacyPolicyComponent,
     AboutSistersideComponent,
     NetworkComponent,
+    TagFormComponent,
+    NetworkFormComponent,
+    TagFormComponent,
+    NetworkFormComponent
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot()

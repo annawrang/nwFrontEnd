@@ -1,0 +1,23 @@
+.img-responsive {
+    width: 15%;
+    height: 15%;
+}
+
+.background{
+    background-color: gray
+}
+
+.filter:hover {
+    background-color: gray
+}
+
+.img {
+    border-radius: 50%;
+}
+
+
+.networks{
+    width:200%;
+    float:left;
+    font-size: 90%;
+}

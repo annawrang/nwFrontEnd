@@ -9,3 +9,76 @@
   
   </div>
 </div>
+
+
+<div class="row"> 
+  <div class="col-9">
+    <div class="ml-3">
+      <h3>Browse All Networks</h3>
+      <div class="row">
+        <div class="form-group  col-lg-2 col-sm">
+          <select class="form-control" #networkCountryTagsName = "ngModel" [ngModel] ="network?.countryTags.name" (ngModelChange)='onCountrySelected($event)' name="countryTag" >
+            <option [value]="null" disabled selected hidden >Country</option>
+            <option [value]= "null">All</option>
+            <option  [value] = "countryTag.name" *ngFor="let countryTag of tags.countryTags">{{countryTag.name}}</option>
+          </select>
+        </div>  
+        <div class="form-group col-lg-2 col-sm">
+          <select class="form-control" #networkAreaTagsName = "ngModel" [ngModel] ="network?.countryTags.areaTags.name" name="areaTag" (ngModelChange)='onAreaSelected($event)'>
+              <option [value]="null" disabled selected hidden >Area</option>
+              <option [value]="null" >All</option>
+            <option [value] = "areaTag.name" *ngFor="let areaTag of areaTags">{{areaTag.name}}</option>
+          </select>
+        </div>
+        <div class="form-group col-lg-2 col-sm ">
+            <select class="form-control" #networkForTagsName = "ngModel" [ngModel] ="network?.fortags.name" name="forTag" (ngModelChange)='onForSelected($event)'>
+                <option [value]="null" disabled selected hidden >Something</option>
+              <option [value] = "forTag.name" *ngFor="let forTag of tags.forTags">{{forTag.name}}</option>
+            </select>
+        </div>
+        <div class="form-group col-lg-2 col-sm ">
+        <section class="filter-wrapper">
+            <div class="keyword-wrapper">
+           <input type="text" id="keyword" [formControl]="queryField" placeholder="Search for artists..." autofocus/>
+             </div>
+           <ul class="filter-select">
+             <li class="filter-select-list" *ngFor="let result of results"><img src="" alt="" width="50" height="50"><p class="network-name">{{result.name}}</p>
+           <span class="tags"></span>
+           </ul>
+           </section>
+          </div>
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let user of (filteredUsers | async)?.results" [value]="user">
+                <span>{{ user.name }}</span>
+                <small> | ID: {{user.id}}</small>
+              </mat-option>
+            </mat-autocomplete>
+      </div>
+    </div>
+    <div class="networks col-lg-4 col-md-10 col-sm-12 mb-4" *ngFor="let network of networks">
+      <div class="box-network ">
+        <div class="row pt-2 pl-2">
+         <img class="img-responsive col img img-border" src="{{network.pictureUrl}}" alt="Generic placeholder image">
+          <h6 class=" col-6 "><u>{{network.name}}</u></h6>
+          <div class =" add col">
+            <u>+ Add</u>
+          </div>
+        </div>
+        <div class="">
+          <div class="ellipsis text-justify" >
+            {{ network.description | limitTo:limit}}<a src=""><u>{{network.description.length > limit ? '...more' : ''}}</u></a>
+          </div>
+        </div>           
+      </div>
+    </div>
+  </div>
+  <div class="custom-side col-2">
+    <div class="box-add-network">
+    <label>+ Add Network</label>
+    </div>
+  </div>
+</div>
+<div class="container">
+   
+   
+</div>
