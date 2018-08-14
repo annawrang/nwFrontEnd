@@ -1,3 +1,4 @@
+import { TruncatePipe } from './dashboard/network/pipes/TruncatePipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -50,7 +51,8 @@ import { NetworkFormComponent } from './dashboard/network/network-form/network-f
     TagFormComponent,
     NetworkFormComponent,
     TagFormComponent,
-    NetworkFormComponent
+    NetworkFormComponent,
+    TruncatePipe
 
   ],
   imports: [

@@ -1,3 +1,5 @@
+import { TagFormComponent } from './dashboard/network/tag-form/tag-form.component';
+import { NetworkFormComponent } from './dashboard/network/network-form/network-form.component';
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './welcome/user.component';
@@ -24,6 +26,8 @@ export const appRoutes: Routes = [
             { path: 'post/:id', component: PostComponent },
             { path: 'profile/:id', component: ProfileComponent },
             { path: 'networks', component: NetworkComponent },
+            { path: 'networks/form', component: NetworkFormComponent },
+            { path: 'networks/form/tags', component: TagFormComponent},
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: '**', redirectTo: 'home', pathMatch: 'full' }
         ]
