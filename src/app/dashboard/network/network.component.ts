@@ -2,6 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { NetworkService } from './network.service';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { Network } from './model/network.model';
 
 
 @Component({
@@ -41,14 +42,6 @@ export class NetworkComponent implements OnInit {
     this.areaSelected = null;
     this.countrySelected = null;
     
-    this.queryField = new FormControl();
-    this.queryField.valueChanges
-    .subscribe(query => {
-      this.networkService.getNetworksSearch(query).subscribe(data => {
-        this.results = data;
-        console.log(data);
-      })
-    })
   }
 
   initForm():FormGroup {
@@ -57,9 +50,11 @@ export class NetworkComponent implements OnInit {
     })
   }
 
-  selectValue(value){
-    this.stateForm.patchValue({"search": value});
+  selectValue(value: any){
+    this.stateForm.patchValue({"search": value.name});
     this.showSearchDropDown = false;
+    this.networks = [value];
+    console.log(value);
   }
   closeDropDown() {
     console.log("close before value: " + this.showSearchDropDown);
@@ -100,11 +95,24 @@ export class NetworkComponent implements OnInit {
 
   onKey(search: any){
     this.search = search;
+    this.showSearchDropDown = true;
+    console.log(this.search);
+    let length = this.search.toString().length;
+    if(length > 1 ) {
     this.networkService.getNetworksSearch(search).subscribe( data => {
       this.results = data;
     })
+   } else {
+     this.results = null;
+     this.networkService.getNetworks().subscribe(data => {
+      this.networks = data;
+    })
+   }
   }
 
+  getSearchValue(){
+    return this.stateForm.value.search;
+  }
   onAreaSelected(area: any){
     this.areaSelected = area;
     this.networkService.findNetworksWithParam(this.countrySelected, area, this.forTagsSelected).subscribe(data => {

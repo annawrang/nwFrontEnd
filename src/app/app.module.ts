@@ -1,3 +1,4 @@
+import { LetterBoldPipe } from './dashboard/network/shared/LetterBoldPipe';
 import { TruncatePipe } from './dashboard/network/shared/TruncatePipe';
 import { ClickOutsideDirective } from './dashboard/network/shared/ClickOutsideDirective';
 import { BrowserModule } from '@angular/platform-browser';
@@ -54,7 +55,8 @@ import { NetworkFormComponent } from './dashboard/network/network-form/network-f
     TagFormComponent,
     NetworkFormComponent,
     TruncatePipe,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    LetterBoldPipe
   ],
   imports: [
     BrowserModule,

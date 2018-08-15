@@ -23,16 +23,15 @@
               <option [value] = "forTag.name" *ngFor="let forTag of tags.forTags">{{forTag.name}}</option>
             </select>
         </div>
-        <div class=" col-lg-3 col-sm ">
+        <div class=" col-lg-4 col-sm ml-auto mr-3">
         <form [formGroup]="stateForm" autocomplete="off" novalidate>
-           <div  class="pos-rel">
-              <input type="text" id="search" formControlName='search' (click)="closeDropDown()" [formControl]="queryField" placeholder="Search for network..." autofocus/>
-                <div *ngIf="showSearchDropDown" class="state-container-dropdown">
-                <div>
-                  <div class="state" (click)="selectValue(result.name)" *ngFor="let result of results">
-                    {{result.name}}
-                  </div>
-               </div>
+           <div class="pos-rel">
+              <input type="text" id="search" formControlName='search' (click)="closeDropDown()" #box (keyup)="onKey(box.value)" placeholder="Search for network..." autofocus/>
+              <div *ngIf="showSearchDropDown" class="state-container-dropdown">    
+                  <div class="state" (click)="selectValue(result)" *ngFor="let result of results">
+                    <a [innerHTML]="result.name | letterBold: getSearchValue()">
+                    {{result.name}} </a><span>Name</span>
+                  </div>        
              </div>  
             </div>
             </form>
