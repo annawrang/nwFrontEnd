@@ -4,7 +4,7 @@ import { UserService } from './popups/sharedServices/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { User } from '../welcomePage/popups/sharedServices/user.model';
+import { User } from './popups/sharedServices/user.model';
 
 
 @Component({

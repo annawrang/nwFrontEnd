@@ -1,6 +1,7 @@
+import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { NetworkService } from './network.service';
-import { FormControl } from '../../../../node_modules/@angular/forms';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -17,13 +18,16 @@ export class NetworkComponent implements OnInit {
   private forTagsSelected: string [];
   private limit = 90;
   private search = '';
-  results;
-  queryField;
+  private results;
+  private queryField;
+  showSearchDropDown = false;
+  private stateForm: FormGroup;
 
 
-  constructor(private networkService: NetworkService) { }
+  constructor(private networkService: NetworkService, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.initForm();
     this.networkService.getNetworks().subscribe(data => {
       this.networks = data;
       console.log(data);
@@ -38,17 +42,30 @@ export class NetworkComponent implements OnInit {
     this.countrySelected = null;
     
     this.queryField = new FormControl();
-    this.queryField.valueChanges.subscribe(query =>{
+    this.queryField.valueChanges
+    .subscribe(query => {
       this.networkService.getNetworksSearch(query).subscribe(data => {
         this.results = data;
         console.log(data);
       })
     })
-    //.subscribe( result =>{ console.log(result) });
-
   }
 
-  
+  initForm():FormGroup {
+    return this.stateForm = this.fb.group({
+      search: [null]
+    })
+  }
+
+  selectValue(value){
+    this.stateForm.patchValue({"search": value});
+    this.showSearchDropDown = false;
+  }
+  closeDropDown() {
+    console.log("close before value: " + this.showSearchDropDown);
+    this.showSearchDropDown = !this.showSearchDropDown;
+    console.log("close after value: " + this.showSearchDropDown);
+  }
   onForTagSelected(forTag: any){
     console.log(forTag.name);
     var index =  this.forTagsSelected.indexOf(forTag.name);
@@ -84,9 +101,10 @@ export class NetworkComponent implements OnInit {
   onKey(search: any){
     this.search = search;
     this.networkService.getNetworksSearch(search).subscribe( data => {
-      this.networks = data;
+      this.results = data;
     })
   }
+
   onAreaSelected(area: any){
     this.areaSelected = area;
     this.networkService.findNetworksWithParam(this.countrySelected, area, this.forTagsSelected).subscribe(data => {

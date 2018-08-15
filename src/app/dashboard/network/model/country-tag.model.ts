@@ -1,5 +1,5 @@
 import { AreaTag } from './area-tag-model';
-import { Optional } from '../../../../../node_modules/@angular/core';
+import { Optional } from '@angular/core';
 export class CountryTag {
     name: string
 }

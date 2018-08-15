@@ -1,6 +1,6 @@
-import { NetworkService } from './../network.service';
+import { NetworkService } from '../network.service';
 import { NgForm } from '@angular/forms';
-import { CountryForm } from './../model/country-tag.model';
+import { CountryForm } from '../model/country-tag.model';
 import { Component, OnInit } from '@angular/core';
 import { Network } from '../model/network.model';
 

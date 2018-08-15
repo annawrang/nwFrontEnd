@@ -1,6 +1,7 @@
-import { TruncatePipe } from './dashboard/network/pipes/TruncatePipe';
+import { TruncatePipe } from './dashboard/network/shared/TruncatePipe';
+import { ClickOutsideDirective } from './dashboard/network/shared/ClickOutsideDirective';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ApplicationRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -52,18 +53,21 @@ import { NetworkFormComponent } from './dashboard/network/network-form/network-f
     NetworkFormComponent,
     TagFormComponent,
     NetworkFormComponent,
-    TruncatePipe
-
+    TruncatePipe,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule,
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot()
   ],
   providers: [UserService, AuthGuard, FeedService, ProfileService, PostService, NetworkService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+}

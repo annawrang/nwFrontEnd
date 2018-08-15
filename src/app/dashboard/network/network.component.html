@@ -23,21 +23,25 @@
               <option [value] = "forTag.name" *ngFor="let forTag of tags.forTags">{{forTag.name}}</option>
             </select>
         </div>
-        <div class="form-group col-lg-2 col-sm ">
-        <section class="filter-wrapper">
-            <div class="keyword-wrapper">
-           <input type="text" id="keyword" [formControl]="queryField" placeholder="Search for artists..." autofocus/>
-             </div>
-           <ul class="filter-select">
-             <li class="filter-select-list" *ngFor="let result of results"><img src="" alt="" width="50" height="50"><p class="network-name">{{result.name}}</p>
-           <span class="tags"></span>
-           </ul>
-           </section>
-          </div>
-      </div>
-    </div>
+        <div class=" col-lg-3 col-sm ">
+        <form [formGroup]="stateForm" autocomplete="off" novalidate>
+           <div  class="pos-rel">
+              <input type="text" id="search" formControlName='search' (click)="closeDropDown()" [formControl]="queryField" placeholder="Search for network..." autofocus/>
+                <div *ngIf="showSearchDropDown" class="state-container-dropdown">
+                <div>
+                  <div class="state" (click)="selectValue(result.name)" *ngFor="let result of results">
+                    {{result.name}}
+                  </div>
+               </div>
+             </div>  
+            </div>
+            </form>
+          </div>  
+         </div>
+        </div>
+    
     <div class="networks col-lg-4 col-md-10 col-sm-12 mb-4" *ngFor="let network of networks">
-      <div class="box-network ">
+      <div class="box-network">
         <div class="row pt-2 pl-2">
          <img class="img-responsive col img img-border" src="{{network.pictureUrl}}" alt="Generic placeholder image">
           <h6 class=" col-6 "><u>{{network.name}}</u></h6>
@@ -58,8 +62,4 @@
     <label>+ Add Network</label>
     </div>
   </div>
-</div>
-<div class="container">
-   
-   
 </div>
