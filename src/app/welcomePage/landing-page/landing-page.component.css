@@ -1,0 +1,27 @@
+.centerSpace {
+    border-style: solid;
+    border-width: 1px;
+    border-left-color: lightgray;
+    border-top-color: lightgray;
+    border-bottom-color: lightgray;
+
+    margin-top: 22px;
+    margin-bottom: 22px;
+}
+
+.bottomCenterSpace {
+
+}
+
+.bottomCenterSpace, .bottomRightSpace, .bottomLeftSpace {
+    border-style: solid;
+    border-width: 1px;
+    border-left-color: lightgray;
+    border-top-color: lightgray;
+    border-bottom-color: lightgray;
+}
+
+@media (min-width: 1200px) {
+
+
+}
