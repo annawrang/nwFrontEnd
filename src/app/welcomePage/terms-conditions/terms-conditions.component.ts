@@ -12,4 +12,8 @@ export class TermsConditionsComponent implements OnInit {
   ngOnInit() {
   }
 
+  onBackButton(){
+    
+  }
+
 }
