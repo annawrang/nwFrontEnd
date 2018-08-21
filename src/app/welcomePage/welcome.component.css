@@ -6,11 +6,6 @@
     border-width: 1px;
     border-left-color: lightgray;
 
-    
-}
-
-.nav-item {
-   
 }
 
 .login-nav-item {
@@ -22,27 +17,24 @@
     border-left-color: lightgray;
 
     padding-left: 10px;
-
-    
 }
-
-
-
 
 .modal-button {
     margin: 15px;
     background-color: white;
 }
 
+
 .buttonsAndInputBoxes {
     height: 40px;
     margin: 5px;
 }
 
+.shortBox {
+    width: 41.2%;
+    padding-left: 15px;
+}
 
 
 @media (min-width: 1200px) {
-
-
-
 }

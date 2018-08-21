@@ -1,4 +1,9 @@
-<nav class="navbar navbar-expand-lg">
+<!DOCTYPE html>
+<html>
+
+<div class="wholeComponent">
+
+<nav class="navbar navbar-expand-lg fixed-top mx-auto">
   <a routerLink="/dashboard/home">LOGO</a>
   <button class="navbar-toggler hidden-sm-up navbar-toggleable-xs" data-toggle="collapse" aria-controls="#dashboardCollapseNav"
     data-target="#dashboardCollapseNav">
@@ -11,17 +16,43 @@
           <a routerLink="/dashboard/home">Home</a>
         </li>
         <li>
-          <a routerLink="/dashboard/profile/{{userNumber}}">Profile</a>
-        </li>
-        <li>
           <a routerLink="/dashboard/networks">Networks</a>
-        </li>
-        <li>
-          <a (click)="logout()">Log out</a>
         </li>
       </ul>
     </div>
   </div>
+
+  <div ngbDropdown>
+    <button class="btn icon-black" id="userOptionsDropdown" ngbDropdownToggle>
+      <i class="fa fa-user"></i>
+    </button>
+    <div ngbDropdownMenu aria-labelledby="userOptionsDropdown">
+      <a routerLink="/dashboard/profile/{{userNumber}}">
+        <button class="dropdown-item">My profile</button>
+      </a>
+
+
+    </div>
+  </div>
+
+
+  <div ngbDropdown>
+    <button class="btn icon-black" id="dotsOptionsDropdown" ngbDropdownToggle>
+      <i class="fa fa-ellipsis-h"></i>
+    </button>
+    <div ngbDropdownMenu aria-labelledby="userOptionsDropdown">
+      <button class="dropdown-item" (click)="logout()">Log out</button>
+
+    </div>
+  </div>
+
+
+
 </nav>
 
+<div class="routerOutlet">
 <router-outlet></router-outlet>
+</div>
+
+</div>
+</html>

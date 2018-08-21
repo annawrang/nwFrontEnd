@@ -3,25 +3,25 @@
 
 <div class="row">
 
-  <div class="miniProfile col-2" *ngIf="miniUser != undefined">
-<div class="section">
-        <div class="miniProfileName">{{miniUser.user.firstName}} {{miniUser.user.surName}}</div>
-        <div class="miniProfileWorkTitle">Title: {{miniUser.workTitle}}</div>
-        <div class="miniProfileInterests">Interests: {{miniUser.description}}</div>
-      </div>
+  <div class="miniProfile col-3" *ngIf="miniUser != undefined">
+    <div class="section card miniProfile-text">
+      <div class="miniProfileName boldFont mx-auto">{{miniUser.user.firstName}} {{miniUser.user.surName}}</div>
+      <div class="miniProfileWorkTitle mx-auto">Title: {{miniUser.workTitle}}</div>
+      <div class="miniProfileInterests mx-auto">Interests: {{miniUser.description}}</div>
+    </div>
   </div>
 
 
 
-  <div class="col-8 mx-auto">
+  <div class="col-6 mx-auto">
 
     <div *ngIf="postCompletes != undefined">
       <!-- WRITE NEW POST-->
-      <div class="section">
+      <div class="section card">
         <div class="newPost">
 
           <div class="row">
-            <input type="text" #inputText placeholder="What would you like to share, {{miniUser.user.firstName}}?">
+            <input type="text" class="newPostText" #inputText placeholder="What would you like to share, {{miniUser.user.firstName}}?">
           </div>
           <div class="row">
             <img *ngIf="selectedImage" [src]="tempNewPost.pictureUrl" width="180">
@@ -32,20 +32,20 @@
           </div>
 
           <div class="row">
-            <button>
+            <button class="btn">
               <i class="fa fa-font"></i>
             </button>
             <input style="display: none" type="file" #fileInput (change)="onImageChanged($event)">
-            <button (click)="fileInput.click()">
+            <button class="btn" (click)="fileInput.click()">
               <i class="fa fa-image"></i>
             </button>
-            <button>
+            <button class="btn">
               <i class="fa fa-video-camera"></i>
             </button>
-            <button>
+            <button class="btn">
               <i class="fa fa-smile-o"></i>
             </button>
-            <button class="btn-new-post" (click)="onPost(inputText.value)">Post</button>
+            <button class="btn-new-post ml-auto" (click)="onPost(inputText.value)">Post</button>
           </div>
         </div>
       </div>
@@ -54,123 +54,190 @@
       <!-- LIST OF POSTS -->
 
       <div *ngFor="let postComplete of postCompletes">
-        <div class="section">
+        <div class="section card">
           <div class="post">
 
 
-
-            <div class="row">
-              <!-- USER -->
-              <div class="postUserImage">
-                USER IMAGE
-              </div>
-
-
-              <div class="postUser col">
-                <a routerLink="../profile/{{postComplete.post.user.userNumber}}">
-                  <div class="row">{{postComplete.post.user.firstName}} {{postComplete.post.user.surName}}</div>
-                  <div class="row">Java Developer</div>
-                </a>
+            <div class="post-text-top">
+              <div class="row">
+                <!-- USER -->
+                <div class="postUserImage">
+                  USER IMAGE
+                </div>
 
 
-                <!-- POST DATE -->
-                <div class="postDate row">
-                  {{postComplete.post.date|date: 'd MMMM H:mm'}}
+                <div class="postUser col">
+                  <a routerLink="../profile/{{postComplete.post.user.userNumber}}">
+                    <div class="row boldFont">{{postComplete.post.user.firstName}} {{postComplete.post.user.surName}}</div>
+                    <div class="row">Java Developer</div>
+                  </a>
+
+
+                  <!-- POST DATE -->
+                  <div class="postDate row">
+                    {{postComplete.post.date|date: 'd MMMM H:mm'}}
+                  </div>
+
+                </div>
+
+                <!-- MORE BUTTON -->
+                <div ngbDropdown>
+                  <button class="btn" id="moreOptionPostDropdown" ngbDropdownToggle>
+                    <i class="fa fa-ellipsis-h"></i>
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="moreOptionPostDropdown">
+                    <button class="dropdown-item">Report</button>
+                    <!-- EDIT POST -->
+                    <button class="edit dropdown-item" *ngIf="postComplete.post.user.userNumber == uNumber" (click)='makeEditable(postComplete.post)'>Edit</button>
+                    <!-- DELETE BUTTON-->
+                    <button class="delete dropdown-item" *ngIf="postComplete.post.user.userNumber == uNumber" (click)="onDelete(postComplete.post.postNumber)">Delete</button>
+                  </div>
                 </div>
 
               </div>
 
-              <!-- MORE BUTTON -->
-              <div ngbDropdown>
-                <button class="btn btn-outline-primary" id="moreOptionPostDropdown" ngbDropdownToggle>
-                  <i class="fa fa-ellipsis-h"></i>
-                </button>
-                <div ngbDropdownMenu aria-labelledby="moreOptionPostDropdown">
-                  <button class="dropdown-item">Report</button>
-                  <!-- EDIT POST -->
-                  <button class="edit dropdown-item" *ngIf="postComplete.post.user.userNumber == uNumber" (click)='makeEditable(postComplete.post)'>Edit</button>
-                  <!-- DELETE BUTTON-->
-                  <button class="delete dropdown-item" *ngIf="postComplete.post.user.userNumber == uNumber" (click)="onDelete(postComplete.post.postNumber)">Delete</button>
+
+
+              <!-- POST TEXT && IF EDITABLE-->
+              <div class="postText">
+                <div *ngIf="!postComplete.post.isEditable">
+                  <div *ngIf="postComplete.post.text.length < 30" class="bigFont">
+                    <a routerLink="../post/{{postComplete.post.postNumber}}">
+                      <p>{{postComplete.post.text}}</p>
+                    </a>
+                  </div>
+                  <div *ngIf="postComplete.post.text.length > 29">
+                    <a routerLink="../post/{{postComplete.post.postNumber}}">
+                      <p>{{postComplete.post.text}}</p>
+                    </a>
+                  </div>
+                </div>
+                <!-- Editable -->
+                <div *ngIf="postComplete.post.isEditable == true">
+                  <textarea #newText>{{postComplete.post.text}}</textarea>
+                  <button class="postEdit" (click)="onEdit(postComplete.post, newText.value)">Finished editing</button>
                 </div>
               </div>
 
-            </div>
+
+              <div class="post-text-bottom">
+                <!-- LIKES && COMMENTS-->
+                <div class="row borderBottom">
+
+                  <div class="postLikes mr-auto">
+
+                    <!-- 1 LIKE -->
+                    <div *ngIf="postComplete.likes == 1">
+                      {{postComplete.likes}} like
+                    </div>
+                    <!-- 1+ LIKES -->
+                    <div *ngIf="postComplete.likes != 1">
+                      {{postComplete.likes}} likes
+                    </div>
+                    <!-- 1 COMMENT-->
+                  </div>
+                  <div class="seeComment ml-auto" (click)="seeComments(postComplete.post)">
+                    <div *ngIf="postComplete.comment.length == 1">
+                      {{postComplete.comment.length}} comment
+                    </div>
+                    <!-- 1+ COMMENTS -->
+                    <div *ngIf="postComplete.comment.length != 1">
+                      {{postComplete.comment.length}} comments
+                    </div>
+                  </div>
+                </div>
 
 
-
-            <!-- POST TEXT && IF EDITABLE-->
-            <div class="postText">
-              <div *ngIf="!postComplete.post.isEditable">
-                <a routerLink="../post/{{postComplete.post.postNumber}}">
-                  <p>{{postComplete.post.text}}</p>
-                </a>
+                <!--  LIKE BUTTON -->
               </div>
-              <!-- Editable -->
-              <div *ngIf="postComplete.post.isEditable == true">
-                <textarea #newText>{{postComplete.post.text}}</textarea>
-                <button class="postEdit" (click)="onEdit(postComplete.post, newText.value)">Finished editing</button>
+              <div class="row">
+                <div class="likeButton">
+                  <button class="btn-like btn" (click)="onLike(postComplete.post.postNumber)">
+                    <i class="fa fa-hand-o-right"></i> Like
+                  </button>
+                </div>
+                <!-- COMMENT BUTTON -->
+                <div>
+                  <button class="comment btn" (click)="makeCommentable(postComplete.post)">
+                    <i class="fa fa-commenting-o"></i> Comment
+                  </button>
+                </div>
               </div>
 
-              <!-- LIKES && COMMENTS-->
-              <div class="postLikes">{{postComplete.likes}} likes</div>
-              <div>
-                <button class="seeComment" (click)="seeComments(postComplete.post)">{{postComplete.comment.length}} comments</button>
+
+
+              <!-- WRITE NEW COMMENT-BOX-->
+              <div *ngIf="postComplete.post.isCommentable">
+                <div class="row">
+                  <textarea #newComment class="newCommentTextArea mx-auto"></textarea>
+                </div>
+                <div class="row">
+                  <button class="postComment-btn mx-auto" (click)="onComment(postComplete.post, newComment.value)">Post comment</button>
+                </div>
               </div>
 
-
-
-              <!--  LIKE BUTTON -->
-            </div>
-            <div class="likeButton">
-              <button class="btn-like" (click)="onLike(postComplete.post.postNumber)">
-                <i class="fa fa-hand-o-right"></i> Like
-              </button>
-            </div>
-            <!-- COMMENT BUTTON -->
-            <div>
-              <button class="comment" (click)="makeCommentable(postComplete.post)">
-                <i class="fa fa-commenting-o"></i> Comment
-              </button>
-            </div>
-
-
-
-
-            <!-- WRITE NEW COMMENT-BOX-->
-            <div *ngIf="postComplete.post.isCommentable">
-              <textarea #newComment></textarea>
-              <button class="postComment" (click)="onComment(postComplete.post, newComment.value)">Post comment</button>
-            </div>
-
-            <!-- SEE COMMENTS -->
-            <div class="commentSection" *ngIf="postComplete.post.seeComments">
-              <div class="eachComment" *ngFor="let comment of postComplete.comment | slice:0:3">
-                USER: {{comment.user.firstName}} {{comment.user.surName}} KOMMENTAR: {{comment.text}}
-              </div>
-              <div *ngIf="postComplete.comment.length > 3">
-                <a routerLink="../post/{{postComplete.post.postNumber}}">
-                  <button class="seeAllComments">See all</button>
-                </a>
+              <!-- SEE COMMENTS -->
+              <div class="commentSection" *ngIf="postComplete.post.seeComments">
+                <div class="eachComment row" *ngFor="let comment of postComplete.comment | slice:0:3">
+                  <div class="commenting-user-image">USER IMAGE</div>
+                  <div class="comment-box row">
+                    <div class="commenting-user-name boldFont"> {{comment.user.firstName}} {{comment.user.surName}} </div>
+                    <div class="comment-text">{{comment.text}}</div>
+                  </div>
+                </div>
+                <div *ngIf="postComplete.comment.length > 3">
+                  <a routerLink="../post/{{postComplete.post.postNumber}}">
+                    <button class="seeAllComments">See all</button>
+                  </a>
+                </div>
               </div>
             </div>
-
           </div>
         </div>
 
       </div>
 
-      <button class="loadMorePosts" (click)="loadMorePosts()">Load more...</button>
+
+      <div class="search-results" infiniteScroll [infiniteScrollDistance]="0.4" [infiniteScrollThrottle]="1500" (scrolled)="onScroll()">
+      </div>
+
     </div>
   </div>
 
 
-  <div class="networksInYourArea ml-auto col-2">
-    <div class="section">
+  <div class="networksInYourArea ml-auto col-3">
+    <div class="section card">
 
-        <div class="row">
-          <h3>Networks in your area</h3>
+      <div class="row">
+        <h3 class="sectionTitle boldFont">Networks in your area</h3>
+      </div>
+
+    </div>
+    <div class="privacyEtc">
+      <ul>
+        <div class="underlinedWord">
+          <li>
+            <div class="row">
+              <a routerLink="/dashboard/terms">Terms & Conditions</a>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <a routerLink="/dashboard/privacypolicy">Privacy Policy</a>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <a routerLink="/dashboard/home">Contact us</a>
+            </div>
+          </li>
         </div>
-      
+        <li>
+          <div class="row">
+            © Sisterside. All rights reserved
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

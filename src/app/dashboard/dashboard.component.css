@@ -1,0 +1,61 @@
+
+.dropdown-toggle::after {
+    display:none;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.routerOutlet {
+    padding-top: 25px;
+}
+.navbar {
+    width: 78.4%;
+
+    border-left-style: solid;
+    border-bottom-style: solid;
+    border-right-style: solid;
+    border-width: 1px;
+    border-left-color: lightgray;
+    margin-bottom: 2%;
+
+    background-color: white;
+
+}
+
+.navbar a {
+    font-size: 14px;
+}
+
+#userOptionsDropdown, #dotsOptionsDropdown {
+    border: none
+}
+
+
+.icon-black {
+    color: black;
+    background-color: white;
+}
+
+.icon-black:hover {
+    color: black;
+    background-color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.icon-black:focus {
+    color: black;
+    background-color: transparent;
+    outline:0 !important;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}

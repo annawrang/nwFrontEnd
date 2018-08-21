@@ -21,6 +21,18 @@
     border-left-color: lightgray;
     border-top-color: lightgray;
     margin-top: 22px;
+
+    font-size: 9px;
+}
+
+.copyright {
+    font-size: 12px;
+    padding-top: 15px;
+}
+
+.footerText {
+    padding-top: 15px;
+    padding-left: 20px;
 }
 
 .bottomCenterSpace {
@@ -40,6 +52,9 @@
 
     padding: 20px;
 }
+
+
+
 
 @media (min-width: 1200px) {
 

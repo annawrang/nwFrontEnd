@@ -32,111 +32,114 @@
 
 
 
+<div class="modal">
+  <div class="modal-dialog modal-admin">
 
-    <div class="modal-dialog">
+    <div class="modal-content">
 
-      <div class="modal-content">
+      <ng-template #login let-c="close" let-d="dismiss">
 
-        <ng-template #login let-c="close" let-d="dismiss">
+        <button type="button" class="close ml-auto" aria-label="Close" style="padding-right:5px;" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div *ngIf="loginError">Incorrect email or password</div>
+        <div class="mx-auto">
+          <h4 class="modal-title" style="font-size: 20px;">Log in</h4>
+        </div>
 
-          <button type="button" class="close ml-auto" aria-label="Close" (click)="d('Cross click')">
+        <div class="modal-body">
+          <form #loginForm="ngForm">
+            <div class="row">
+              <input type="text" #userEmail name="userEmail" placeholder="Email" class="rounded mx-auto col-9 buttonsAndInputBoxes">
+            </div>
+            <div class="row">
+              <input type="password" #password name="password" placeholder="Password" class="rounded mx-auto col-9 buttonsAndInputBoxes">
+            </div>
+            <div class="row">
+              <button type="submit" class="mx-auto modal-button col-9 buttonsAndInputBoxes" (click)="loginUser(login, userEmail.value, password.value)">Log in</button>
+            </div>
+          </form>
+
+          <div class="row" >
+            <p>Don't have an account?</p>
+            <div (click)="openSignUp(signup)"> Sign up</div>
+          </div>
+        </div>
+
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<div class="modal">
+  <div class="modal-dialog modal-admin" >
+
+    <div class="modal-content">
+      <div class="signupBox">
+        <ng-template #signup let-d="dismiss">
+          <button type="button" class="close ml-auto" aria-label="Close" style="padding-right:5px;" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
           </button>
-          <div *ngIf="loginError">Incorrect email or password</div>
+
+          <div *ngIf="signUpSuccess" class="row">
+            <p>Registation successful!</p>
+          </div>
+
           <div class="mx-auto">
-            <h4 class="modal-title" style="font-size: 20px;">Log in</h4>
+            <h2 style="font-size: 20px;" class="modal-title">Sign up</h2>
           </div>
 
           <div class="modal-body">
-            <form #loginForm="ngForm">
+            <form #UserRegistrationForm="ngForm" (ngSubmit)="registerUser(UserRegistrationForm, passwordDouble.value); UserRegistrationForm.reset(); passwordDouble.value='';">
+             
+              <div class="row" style="padding-left: 12.2%;">
+                <input type="text" class="rounded buttonsAndInputBoxes shortBox"  name="firstName" placeholder="First name" #userName="ngModel"
+                  [ngModel]="user?.firstName">
+                <input type="text" class="rounded buttonsAndInputBoxes shortBox"  name="surName" placeholder="Surname" #userName="ngModel" [ngModel]="user?.surName">
+              </div>
+
               <div class="row">
-                <input type="text" #userEmail name="userEmail" placeholder="Email" class="rounded mx-auto col-9 buttonsAndInputBoxes">
+                <input type="text" class="rounded mx-auto buttonsAndInputBoxes col-9" name="email" placeholder="Email address" #userName="ngModel"
+                  [ngModel]="user?.email">
+              </div>
+
+              <div class="row">
+                <input type="password" class="rounded mx-auto buttonsAndInputBoxes col-9" name="password" placeholder="Choose your password"
+                  #password="ngModel" [ngModel]="user?.password">
+              </div>
+
+              <div *ngIf="passwordsDontMatch" class="row">
+                <p>Passwords don't match</p>
+              </div>
+
+              <div class="row">
+                <input type="password" class="rounded mx-auto buttonsAndInputBoxes col-9" #passwordDouble name="passwordDouble" placeholder="Repeat password">
+              </div>
+
+              <div class="row">
+                <input type="checkbox" #checkboxReadPolicy (click)="approvesPolicy()">
+                <p>I have read and agree to the Sisterside Privacy Policy and Terms & Conditions.</p>
+              </div>
+
+              <div *ngIf="needToApprovePolicy" class="row">
+                <p> Please read and agree to the policies</p>
+              </div>
+
+              <div class="row">
+                <button class="btn-submit btn-large mx-auto buttonsAndInputBoxes col-9" type="submit">Sign up</button>
               </div>
               <div class="row">
-                <input type="password" #password name="password" placeholder="Password" class="rounded mx-auto col-9 buttonsAndInputBoxes">
-              </div>
-              <div class="row">
-                <button type="submit" class="mx-auto modal-button col-9 buttonsAndInputBoxes" (click)="loginUser(login, userEmail.value, password.value)">Log in</button>
+                Already have an account?
+                <div (click)="openLogIn(login)"> Log in</div>
+
               </div>
             </form>
-
-            <div class="row">
-              <p>Don't have an account?</p>
-              <div (click)="openSignUp(signup)"> Sign up</div>
-            </div>
           </div>
-
         </ng-template>
       </div>
     </div>
-
-
-
-  <div class="modal-dialog">
-
-      <div class="modal-content">
-  <div class="signupBox">
-    <ng-template #signup let-d="dismiss">
-      <button type="button" class="close ml-auto" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-
-      <div *ngIf="signUpSuccess" class="row">
-        <p>Registation successful!</p>
-      </div>
-
-      <div class="mx-auto">
-        <h2 style="font-size: 20px;" class="modal-title">Sign up</h2>
-      </div>
-
-      <div class="modal-body">
-      <form #UserRegistrationForm="ngForm" (ngSubmit)="registerUser(UserRegistrationForm, passwordDouble.value); UserRegistrationForm.reset(); passwordDouble.value='';">
-        <div class="row">
-          <input type="text" class="rounded buttonsAndInputBoxes col-4" name="firstName" placeholder="First name" #userName="ngModel" [ngModel]="user?.firstName">
-
-          <input type="text" class="rounded buttonsAndInputBoxes col-4" name="surName" placeholder="Surname" #userName="ngModel" [ngModel]="user?.surName">
-        </div>
-
-        <div class="row">
-          <input type="text" class="rounded mx-auto buttonsAndInputBoxes col-9" name="email" placeholder="Email address" #userName="ngModel" [ngModel]="user?.email">
-        </div>
-
-        <div class="row">
-          <input type="password" class="rounded mx-auto buttonsAndInputBoxes col-9" name="password" placeholder="Choose your password" #password="ngModel" [ngModel]="user?.password">
-        </div>
-
-        <div *ngIf="passwordsDontMatch" class="row">
-          <p>Passwords don't match</p>
-        </div>
-
-        <div class="row">
-          <input type="password" class="rounded mx-auto buttonsAndInputBoxes col-9" #passwordDouble name="passwordDouble" placeholder="Repeat password">
-        </div>
-
-        <div class="row">
-          <input type="checkbox" #checkboxReadPolicy (click)="approvesPolicy()">
-          <p>I have read and agree to the Sisterside Privacy Policy and Terms & Conditions.</p>
-        </div>
-
-        <div *ngIf="needToApprovePolicy" class="row">
-          <p> Please read and agree to the policies</p>
-        </div>
-
-        <div class="row">
-          <button class="btn-submit btn-large mx-auto buttonsAndInputBoxes col-9" type="submit">Sign up</button>
-        </div>
-        <div class="row">
-          Already have an account?
-          <div (click)="openLogIn(login)"> Log in</div>
-
-        </div>
-      </form>
-      </div>
-    </ng-template>
   </div>
-  </div>
-  </div>
-
+</div>
 
 </body>
 

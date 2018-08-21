@@ -32,6 +32,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NetworkComponent } from './dashboard/network/network.component';
 import { TagFormComponent } from './dashboard/network/tag-form/tag-form.component';
 import { NetworkFormComponent } from './dashboard/network/network-form/network-form.component';
+import { LoggedInPrivacyPolicyComponent } from './dashboard/logged-in-privacy-policy/logged-in-privacy-policy.component';
+import { LoggedInTermsCondComponent } from './dashboard/logged-in-terms-cond/logged-in-terms-cond.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -56,7 +59,9 @@ import { NetworkFormComponent } from './dashboard/network/network-form/network-f
     NetworkFormComponent,
     TruncatePipe,
     ClickOutsideDirective,
-    LetterBoldPipe
+    LetterBoldPipe,
+    LoggedInPrivacyPolicyComponent,
+    LoggedInTermsCondComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +70,8 @@ import { NetworkFormComponent } from './dashboard/network/network-form/network-f
     HttpClientModule,
     NgbModule,
     RouterModule.forRoot(appRoutes),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    InfiniteScrollModule
   ],
   providers: [UserService, AuthGuard, FeedService, ProfileService, PostService, NetworkService],
   bootstrap: [AppComponent]

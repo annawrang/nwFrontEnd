@@ -63,7 +63,12 @@ export class HomeComponent implements OnInit {
 
 
   makeCommentable(post: Post){
-    post.isCommentable = true
+    if(post.isCommentable == false){
+      post.isCommentable = true
+    } else {
+      post.isCommentable = false
+    }
+    
     console.log('är commentable : ' + post.isCommentable)
   }
 
@@ -143,6 +148,11 @@ export class HomeComponent implements OnInit {
     this.feedService.createNewPost(post).subscribe(data => {
       console.log(data)
     })
+  }
+
+  onScroll() {
+    console.log('scrolled!!');
+    this.loadMorePosts();
   }
 
 }
