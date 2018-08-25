@@ -8,6 +8,8 @@ export class UserMinimum {
         }
 }
 
+
+
 export interface UserMinimumInterface{
     firstName: string,
     surName: string,

@@ -128,11 +128,11 @@
 
                     <!-- 1 LIKE -->
                     <div *ngIf="postComplete.likes == 1">
-                      {{postComplete.likes}} like
+                      {{postComplete.likes.length}} like
                     </div>
                     <!-- 1+ LIKES -->
                     <div *ngIf="postComplete.likes != 1">
-                      {{postComplete.likes}} likes
+                      {{postComplete.likes.length}} likes
                     </div>
                     <!-- 1 COMMENT-->
                   </div>
@@ -178,12 +178,41 @@
 
               <!-- SEE COMMENTS -->
               <div class="commentSection" *ngIf="postComplete.post.seeComments">
-                <div class="eachComment row" *ngFor="let comment of postComplete.comment | slice:0:3">
-                  <div class="commenting-user-image">USER IMAGE</div>
-                  <div class="comment-box row">
-                    <div class="commenting-user-name boldFont"> {{comment.user.firstName}} {{comment.user.surName}} </div>
-                    <div class="comment-text">{{comment.text}}</div>
+                <div class="eachComment" *ngFor="let comment of postComplete.comment | slice:0:3">
+                  <div class="row">
+                    <div class="commenting-user-image">USER IMAGE</div>
+                    <div class="row">
+                        <div class="comment-box">
+                      <div class="commenting-user-name boldFont"> {{comment.user.firstName}} {{comment.user.surName}} </div>
+                      <div class="comment-text">{{comment.text}}</div>
+                    </div>
+                    <div class="row">
+                        <button class="naked-btn" (click)="likeComment(postComplete.post.postNumber, comment.commentNumber)">Like</button>
+                        <button class="naked-btn" (click)="makeReplyable(comment)">Reply</button>
+                      </div>
                   </div>
+
+
+
+                  </div>
+
+
+                  <div *ngIf="comment.isReplyable row">
+                    <textarea #newReply class="newReplyTextArea mx-auto"></textarea>
+                    <button class="btn post-reply-btn" (click)="replyToComment(postComplete.post.postNumber, comment.commentNumber, newReply.value)">Post</button>
+                  </div>
+
+
+                  <div class="comment-reply" *ngFor="let reply of comment.commentReplies">
+                    <div class="row">
+                      <div class="commenting-user-image">USER IMAGE</div>
+                      <div class="comment-box">
+                        <div class="commenting-user-name boldFont"> {{reply.user.firstName}} {{reply.user.surName}} </div>
+                        <div class="comment-text">{{reply.text}}</div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
                 <div *ngIf="postComplete.comment.length > 3">
                   <a routerLink="../post/{{postComplete.post.postNumber}}">

@@ -12,7 +12,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class FeedService {
-  readonly rootUrl = 'http://127.0.0.1:8080/posts'
+  readonly postUrl = 'http://127.0.0.1:8080/posts'
   readonly userUrl = 'http://127.0.0.1:8080/profile'
   private page = 1
   private userNumber = sessionStorage.getItem('userNumber')
@@ -28,22 +28,22 @@ export class FeedService {
   }
 
   createNewPost(post: Post): Observable<any>{
-    return this.http.post(this.rootUrl, post, {observe: "response", headers: this._headersToken});
+    return this.http.post(this.postUrl, post, {observe: "response", headers: this._headersToken});
   }
 
   editPost(postNumber: string, newText: string): Observable<any>{
     var data = '/' + postNumber
-    return this.http.put(this.rootUrl + data, newText,{headers: this._headersToken, observe: 'response'});
+    return this.http.put(this.postUrl + data, newText,{headers: this._headersToken, observe: 'response'});
   }
 
   deletePost(postNumber: string): Observable<any>{
     var data = '/' + postNumber
-    return this.http.delete(this.rootUrl + data, {headers: this._headersToken, observe: 'response'});
+    return this.http.delete(this.postUrl + data, {headers: this._headersToken, observe: 'response'});
   }
 
   getPostFeed(): Observable<IPostComplete>{
     var data = '?page=' + this.page;
-    return this.http.get<IPostComplete>(this.rootUrl + data, {headers: this._headersToken});
+    return this.http.get<IPostComplete>(this.postUrl + data, {headers: this._headersToken});
   }
 
   nextPage(){
@@ -52,13 +52,22 @@ export class FeedService {
 
   newLike(postNumber: string): Observable<any>{
     var likeData = '/' + postNumber + '/likes'
-    console.log("anropar " + this.rootUrl + likeData)
-    return this.http.post(this.rootUrl + likeData, null,{headers: this._headersToken, observe: 'response'});
+    return this.http.post(this.postUrl + likeData, null,{headers: this._headersToken, observe: 'response'});
+  }
+
+  replyToComment(postNumber: string, commentNumber: string, newReply: string): Observable<any>{
+    var commentReplyData = '/' + postNumber + '/comments/' + commentNumber + '/reply'
+    return this.http.post(this.postUrl + commentReplyData, newReply,{headers: this._headersToken, observe: 'response'});
+  }
+
+  likeComment(postNumber: string, commentNumber: string){
+    var likeCommentData = '/' + postNumber + '/comments/' + commentNumber + '/likes'
+    return this.http.post(this.postUrl + likeCommentData,null, {headers: this._headersToken, observe: 'response'});
   }
 
   commentPost(postNumber: string, newComment: string){
     var newCommentData = '/' + postNumber + '/comments'
-    return this.http.post(this.rootUrl + newCommentData, newComment,{headers: this._headersToken, observe: 'response'});
+    return this.http.post(this.postUrl + newCommentData, newComment,{headers: this._headersToken, observe: 'response'});
   }
 
 }

@@ -1,11 +1,11 @@
-import { UserMinimumInterface } from '../user-minimum.model';
+import { UserMinimumInterface, UserMinimum } from '../user-minimum.model';
 import { PostComment } from "../post-comment.model";
 
 export class Post { 
     text: string
     pictureUrl
-    user: UserMinimumInterface
-    likes: number
+    user: UserMinimum
+    likes: UserMinimum[]
     comments: PostComment[]
     date: Date
     postNumber: string
@@ -33,6 +33,6 @@ export interface IComment{
   
   export interface IPostComplete{
     post: IPost,
-    likes: number,
+    likes: UserMinimumInterface[],
     comments: IComment[]
   }

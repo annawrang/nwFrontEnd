@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.feedService.getPostFeed().subscribe(data =>{
       this.postCompletes = data
+      console.log(data)
         if(this.postCompletes != undefined){
           this.postCompletes.forEach(element => {
             element.post.isEditable = false
@@ -108,6 +109,9 @@ export class HomeComponent implements OnInit {
           element.post.isEditable = false
           element.post.isCommentable = false
           element.post.seeComments = false
+          element.post.comments.forEach(comment =>{
+            comment.isReplyable = false
+          })
         });
     }
     })
@@ -150,8 +154,24 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  likeComment(postNumber, commentNumber){
+    this.feedService.likeComment(postNumber, commentNumber).subscribe(data =>{
+      console.log(data)
+    })
+  }
+
+  makeReplyable(comment){
+    comment.isReplyable = true;
+  }
+
+  replyToComment(postNumber, commentNumber, newReply: string){
+    console.log('skriver ut commentnumber' + commentNumber)
+    this.feedService.replyToComment(postNumber, commentNumber, newReply).subscribe(data =>{
+      console.log(data)
+    })
+  }
+
   onScroll() {
-    console.log('scrolled!!');
     this.loadMorePosts();
   }
 
