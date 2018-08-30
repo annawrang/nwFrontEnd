@@ -21,99 +21,116 @@ export class HomeComponent implements OnInit {
   constructor(private feedService: FeedService) { }
 
   ngOnInit() {
-    this.feedService.getPostFeed().subscribe(data =>{
+    this.feedService.getPostFeed().subscribe(data => {
       this.postCompletes = data
       console.log(data)
-        if(this.postCompletes != undefined){
-          this.postCompletes.forEach(element => {
-            element.post.isEditable = false
-            element.post.isCommentable = false
-            element.post.seeComments = false
-            
-          });
+      if (this.postCompletes != undefined) {
+        this.postCompletes.forEach(element => {
+          element.post.isEditable = false
+          element.post.isCommentable = false
+          element.post.seeComments = false
+          element.post.today = this.checkIfToday(element.post.date);
+          element.post.yesterday = this.checkIfYesterday(element.post.date);
+          if (element.post.today == false && element.post.yesterday == false) {
+            element.post.olderThanYesterday = true;
+          }
+          if (element.post.comments != undefined) {
+            element.post.comments.forEach(comment => {
+              comment.isReplyable = false
+            })
+          }
+        });
       }
     })
 
-    this.feedService.getMiniUser().subscribe(data =>{
+
+    this.feedService.getMiniUser().subscribe(data => {
       this.miniUser = data
       console.log(data)
     })
   }
 
 
-  
 
 
-  makeEditable(post: Post){
+
+  makeEditable(post: Post) {
     post.isEditable = true
     console.log('editar : ' + post.text)
     console.log('är editable : ' + post.isEditable)
   }
 
- seeComments(post: Post){
-   if(post.seeComments == false){
-    post.seeComments = true
-   } else{
-     post.seeComments = false
-   }
+  seeComments(post: Post) {
+    if (post.seeComments == false) {
+      post.seeComments = true
+    } else {
+      post.seeComments = false
+    }
 
-   console.log('see comments: ' + post.seeComments)
+    console.log('see comments: ' + post.seeComments)
 
- }
+  }
 
 
 
-  makeCommentable(post: Post){
-    if(post.isCommentable == false){
+  makeCommentable(post: Post) {
+    if (post.isCommentable == false) {
       post.isCommentable = true
     } else {
       post.isCommentable = false
     }
-    
+
     console.log('är commentable : ' + post.isCommentable)
   }
 
-  onComment(post: Post, newComment: string){
+  onComment(post: Post, newComment: string) {
     post.isCommentable = false
-    this.feedService.commentPost(post.postNumber, newComment).subscribe(data =>{
+    this.feedService.commentPost(post.postNumber, newComment).subscribe(data => {
       console.log(data)
     })
   }
 
-  onEdit(post: Post, newText: string){
+  onEdit(post: Post, newText: string) {
     post.isEditable = false
     this.feedService.editPost(post.postNumber, newText).subscribe(data => {
       console.log(data)
     })
   }
 
-  onLike(postNumber: string){
+  onLike(postNumber: string) {
     this.feedService.newLike(postNumber).subscribe(data => {
       console.log(data)
     })
   }
 
-  onDelete(postNumber: string){
-    this.feedService.deletePost(postNumber).subscribe(data =>{
+  onDelete(postNumber: string) {
+    this.feedService.deletePost(postNumber).subscribe(data => {
       console.log(data)
     })
   }
 
-  loadMorePosts(){
+  loadMorePosts() {
     this.feedService.nextPage()
-    this.feedService.getPostFeed().subscribe(data =>{
+    this.feedService.getPostFeed().subscribe(data => {
       console.log(data)
       this.postCompletes = this.postCompletes.concat(data)
-      if(this.postCompletes != undefined){
+      if (this.postCompletes != undefined) {
         this.postCompletes.forEach(element => {
           element.post.isEditable = false
           element.post.isCommentable = false
           element.post.seeComments = false
-          element.post.comments.forEach(comment =>{
-            comment.isReplyable = false
-          })
+          element.post.today = this.checkIfToday(element.post.date);
+          element.post.yesterday = this.checkIfYesterday(element.post.date);
+          if ((element.post.today == false) && (element.post.yesterday == false)) {
+            element.post.olderThanYesterday = true;
+          }
+          if (element.post.comments != undefined) {
+            element.post.comments.forEach(comment => {
+              comment.isReplyable = false
+            })
+          }
         });
-    }
+      }
     })
   }
 
@@ -130,7 +147,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  onPost(inputText: string){
+  onPost(inputText: string) {
     const post: Post = {
       user: {
         userNumber: null,
@@ -141,12 +158,14 @@ export class HomeComponent implements OnInit {
       pictureUrl: this.tempNewPost.pictureUrl,
       likes: null,
       comments: null,
+      today: null,
+      yesterday: null,
+      olderThanYesterday: null,
       date: null,
       postNumber: null,
       isEditable: false,
       isCommentable: false,
-      seeComments: false,
-      formattedDate: undefined
+      seeComments: false
     }
 
     this.feedService.createNewPost(post).subscribe(data => {
@@ -154,21 +173,46 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  likeComment(postNumber, commentNumber){
-    this.feedService.likeComment(postNumber, commentNumber).subscribe(data =>{
+  likeComment(comment, postNumber, commentNumber) {
+    comment.isReplyable = false;
+    this.feedService.likeComment(postNumber, commentNumber).subscribe(data => {
       console.log(data)
     })
   }
 
-  makeReplyable(comment){
+  makeReplyable(comment) {
     comment.isReplyable = true;
   }
 
-  replyToComment(postNumber, commentNumber, newReply: string){
+  replyToComment(postNumber, commentNumber, newReply: string) {
     console.log('skriver ut commentnumber' + commentNumber)
-    this.feedService.replyToComment(postNumber, commentNumber, newReply).subscribe(data =>{
+    this.feedService.replyToComment(postNumber, commentNumber, newReply).subscribe(data => {
       console.log(data)
     })
+  }
+
+  compareDate() {
+    var today = new Date();
+
+  }
+
+  checkIfToday(date): boolean {
+    var today = new Date();
+    const postDate = new Date(date);
+    if ((today.getFullYear() == postDate.getFullYear()) && (today.getMonth() == postDate.getMonth()) && (today.getDate() == postDate.getDate())) {
+      return true;
+    }
+    return false;
+  }
+
+  checkIfYesterday(date): boolean {
+    var yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const postDate = new Date(date);
+    if ((yesterday.getFullYear() == postDate.getFullYear()) && (yesterday.getMonth() == postDate.getMonth()) && (yesterday.getDate() == postDate.getDate())) {
+      return true;
+    }
+    return false;
   }
 
   onScroll() {

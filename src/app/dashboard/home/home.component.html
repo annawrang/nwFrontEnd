@@ -75,7 +75,15 @@
 
                   <!-- POST DATE -->
                   <div class="postDate row">
+                    <div *ngIf="postComplete.post.today">
+                     Today {{postComplete.post.date|date: 'H:mm'}}
+                    </div>
+                    <div *ngIf="postComplete.post.yesterday">
+                      Yesterday at {{postComplete.post.date|date: 'H:mm'}}
+                    </div>
+                    <div *ngIf="postComplete.post.olderThanYesterday">
                     {{postComplete.post.date|date: 'd MMMM H:mm'}}
+                  </div>
                   </div>
 
                 </div>
@@ -127,14 +135,15 @@
                   <div class="postLikes mr-auto">
 
                     <!-- 1 LIKE -->
-                    <div *ngIf="postComplete.likes == 1">
+                    <div *ngIf="postComplete.likes.length == 1">
                       {{postComplete.likes.length}} like
                     </div>
                     <!-- 1+ LIKES -->
-                    <div *ngIf="postComplete.likes != 1">
+                    <div *ngIf="postComplete.likes.length != 1">
                       {{postComplete.likes.length}} likes
                     </div>
                     <!-- 1 COMMENT-->
+
                   </div>
                   <div class="seeComment ml-auto" (click)="seeComments(postComplete.post)">
                     <div *ngIf="postComplete.comment.length == 1">
@@ -169,10 +178,7 @@
               <!-- WRITE NEW COMMENT-BOX-->
               <div *ngIf="postComplete.post.isCommentable">
                 <div class="row">
-                  <textarea #newComment class="newCommentTextArea mx-auto"></textarea>
-                </div>
-                <div class="row">
-                  <button class="postComment-btn mx-auto" (click)="onComment(postComplete.post, newComment.value)">Post comment</button>
+                  <textarea #newComment class="newCommentTextArea mx-auto" (keyup.enter)="onComment(postComplete.post, newComment.value)"></textarea>
                 </div>
               </div>
 
@@ -182,27 +188,40 @@
                   <div class="row">
                     <div class="commenting-user-image">USER IMAGE</div>
                     <div class="row">
-                        <div class="comment-box">
-                      <div class="commenting-user-name boldFont"> {{comment.user.firstName}} {{comment.user.surName}} </div>
-                      <div class="comment-text">{{comment.text}}</div>
-                    </div>
-                    <div class="row">
-                        <button class="naked-btn" (click)="likeComment(postComplete.post.postNumber, comment.commentNumber)">Like</button>
+                      <div class="comment-box">
+                        <div class="commenting-user-name boldFont"> {{comment.user.firstName}} {{comment.user.surName}} </div>
+                        <div class="comment-text">{{comment.text}}</div>
+                      </div>
+
+                      <!-- 1 COMMENT LIKE -->
+                      <div class="comment.likes">
+                        <div *ngIf="comment.commentLikes.length == 1">
+                          {{comment.commentLikes.length}} like
+                        </div>
+                        <!-- 1+ COMMENT LIKES -->
+                        <div *ngIf="comment.commentLikes.length > 1">
+                          {{comment.commentLikes.length}} likes
+                        </div>
+                      </div>
+
+                      <!-- COMMENT LIKE & COMMENT REPLY BUTTONS-->
+                      <div class="row">
+                        <button class="naked-btn" (click)="likeComment(comment, postComplete.post.postNumber, comment.commentNumber)">Like</button>
                         <button class="naked-btn" (click)="makeReplyable(comment)">Reply</button>
                       </div>
-                  </div>
-
-
+                    </div>
 
                   </div>
 
 
-                  <div *ngIf="comment.isReplyable row">
-                    <textarea #newReply class="newReplyTextArea mx-auto"></textarea>
-                    <button class="btn post-reply-btn" (click)="replyToComment(postComplete.post.postNumber, comment.commentNumber, newReply.value)">Post</button>
+                  <!-- WRITE REPLY TO COMMENT  -->
+                  <div *ngIf="comment.isReplyable">
+                    <div class=" row">
+                      <textarea #newReply class="newCommentTextArea mx-auto" (keyup.enter)="replyToComment(postComplete.post.postNumber, comment.commentNumber, newReply.value)"></textarea>
+                    </div>
                   </div>
 
-
+                  <!-- COMMENT REPLY -->
                   <div class="comment-reply" *ngFor="let reply of comment.commentReplies">
                     <div class="row">
                       <div class="commenting-user-image">USER IMAGE</div>
@@ -216,7 +235,7 @@
                 </div>
                 <div *ngIf="postComplete.comment.length > 3">
                   <a routerLink="../post/{{postComplete.post.postNumber}}">
-                    <button class="seeAllComments">See all</button>
+                    <button class="seeAllComments-btn">See all</button>
                   </a>
                 </div>
               </div>

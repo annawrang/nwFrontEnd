@@ -61,7 +61,7 @@ export class FeedService {
   }
 
   likeComment(postNumber: string, commentNumber: string){
-    var likeCommentData = '/' + postNumber + '/comments/' + commentNumber + '/likes'
+    var likeCommentData = '/' + postNumber + '/comments/' + commentNumber + '/like'
     return this.http.post(this.postUrl + likeCommentData,null, {headers: this._headersToken, observe: 'response'});
   }
 

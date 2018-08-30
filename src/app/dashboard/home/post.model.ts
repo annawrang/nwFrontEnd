@@ -8,11 +8,13 @@ export class Post {
     likes: UserMinimum[]
     comments: PostComment[]
     date: Date
+    today: boolean;
+    yesterday: boolean;
+    olderThanYesterday : boolean;
     postNumber: string
     isEditable: boolean
     isCommentable: boolean
     seeComments: boolean
-    formattedDate
 }
 
 export interface IComment{

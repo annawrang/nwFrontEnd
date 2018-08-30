@@ -1,218 +1,234 @@
-
 .leftSection {
-    width: 16%;
+  width: 16%;
 }
 
 .middleSection {
-    width: 54.5%;
+  width: 54.5%;
 }
 
 .rightSection {
-    width: 16%;
+  width: 16%;
 }
 
 .miniProfile {
-    font-size: 14px;
+  font-size: 14px;
 }
+
 .miniProfile-text {
-    padding: 45px;
+  padding: 45px;
 }
+
 .miniProfileInterests {
-    padding-top: 14px;
+  padding-top: 14px;
 }
 
 .sectionTitle {
-    font-size: 14px;
+  font-size: 14px;
 }
+
 .post {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .post-text-top {
-    padding: 12px 16px 0px 30px;
-}
-.post-text-bottom {
-    padding: 0px 16px 0px 0px;
-}
-.boldFont {
-    font-weight: bold;
-}
-.borderBottom {
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    padding: 10px;
+  padding: 12px 16px 0px 30px;
 }
 
+.post-text-bottom {
+  padding: 0px 16px 0px 0px;
+}
+
+.boldFont {
+  font-weight: bold;
+}
+
+.borderBottom {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  padding: 10px;
+}
 
 .dropdown-toggle::after {
-    display:none;
+  display: none;
 }
 
 #moreOptionPostDropdown {
-    border: none
+  border: none
 }
 
 .section {
-
-    border-radius: 0px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
+  border-radius: 0px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
 }
 
 a {
-    color: black;
+  color: black;
 }
+
 a:hover {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .btn {
-    background-color: white;
-    color: black;
-    font-size: 14px;
+  background-color: white;
+  color: black;
+  font-size: 14px;
 }
+
 .btn:hover {
-    cursor: pointer;
-    color: black;
-    background-color: transparent;
-}
-.btn:focus, .btn:active {
-    color: black;
-    background-color: transparent;
-    outline:0 !important;
-    border: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
+  cursor: pointer;
+  color: black;
+  background-color: transparent;
 }
 
-
+.btn:focus,
+.btn:active {
+  color: black;
+  background-color: transparent;
+  outline: 0 !important;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
 
 .card {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .newPost {
-    padding: 10px 25px 0px 27px;
+  padding: 10px 25px 0px 27px;
 }
 
 .newPost.btn {
-    background-color: white;
-    border: none;
+  background-color: white;
+  border: none;
 }
+
 .newPost.btn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .btn-new-post {
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-    background-color: white;
-    border-right: none;
-    padding-left: 35px;
-    padding-right: 35px;
-    height: 30px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  background-color: white;
+  border-right: none;
+  padding-left: 35px;
+  padding-right: 35px;
+  height: 30px;
 }
 
 .btn-new-post:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .btn-new-post:focus {
-    outline:0 !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
+  outline: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .newPostText {
-width: 100%;
-
-    border-left: solid;
-    border-bottom: solid;
-    border-right: none;
-    border-top: none;
-
-    border-width: 1px;
-    border-color: black;
-
-    padding: 10px;
-
-    margin-bottom: 10px;
+  width: 100%;
+  border-left: solid;
+  border-bottom: solid;
+  border-right: none;
+  border-top: none;
+  border-width: 1px;
+  border-color: black;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .newPostText:focus {
-    outline:0 !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
+  outline: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.seeComment {
+    cursor: pointer;
 }
 
 .postText {
-    padding-top: 16px;
+  padding-top: 16px;
 }
+
 .bigFont {
-    font-size: 26px;
+  font-size: 26px;
 }
 
 .postUserImage {
-    padding-right: 10px;
+  padding-right: 10px;
 }
 
-.postComment-btn {
-margin-bottom: 10px;
-margin-top: 10px;
-margin-right: 0px;
-background-color: white;
-border-style: solid;
-border-width: 1px;
-border-color: black;
-background-color: white;
-height: 30px;
+.seeAllComments-btn {
+  border-radius: 0px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-right: 0px;
+  background-color: white;
+  border-style: solid;
+  border: none;
+  text-decoration: underline;
+  background-color: white;
+  height: 30px;
 }
-.postComment-btn:hover {
-    cursor: pointer;
+
+.seeAllComments-btn:hover {
+  cursor: pointer;
 }
 
 .newCommentTextArea {
-    width: 80%;
-    border-radius: 20px;
+  width: 80%;
+  border-radius: 20px;
 }
+
 .newCommentTextArea:focus {
-    padding: 8px;
-    outline:0 !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
+  padding: 8px;
+  outline: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .comment-box {
-    background-color: lightgray;
-    border-radius: 20px;
-    padding: 6px 10px 6px 10px;
-    margin: 5px 0px 10px 10px;
+  background-color: lightgray;
+  border-radius: 20px;
+  padding: 6px 10px 6px 10px;
+  margin: 10px 0px 10px 10px;
 }
 
-.naked-btn{
-    border: none;
-    background-color: white;
+.naked-btn {
+  border: none;
+  background-color: white;
 }
-.naked-btn:hover{
-    cursor: pointer;
+
+.naked-btn:hover {
+  cursor: pointer;
 }
+
 .commenting-user-image {
-    margin: 5px 0px 10px 10px;
+  margin: 5px 0px 10px 10px;
 }
+
 .commenting-user-name {
-    padding: 0px 5px 0px 0px; 
+  padding: 0px 5px 0px 0px;
 }
+
+.comment-reply {
+  margin-left: 5%;
+}
+
 .underlinedWord {
-    text-decoration: underline;
-    font-size: 9px;
+  text-decoration: underline;
+  font-size: 9px;
 }
 
 .privacyEtc {
-    font-size: 13px;
+  font-size: 13px;
 }
-
-

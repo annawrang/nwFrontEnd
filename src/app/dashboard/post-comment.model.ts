@@ -9,6 +9,7 @@ export class PostComment {
     isReplyable: boolean
 }
 
+
 export class CommentReply{
     text: string
     date: Date
